@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  // NOTE: For Coolify / Hostinger PostgreSQL production deployment, change provider to "postgresql"
+  // and set DATABASE_URL="postgresql://user:password@host:5432/dbname" in your environment variables.
+  url      = env("DATABASE_URL")
+}
+
+model Business {
+  id          String   @id @default(cuid())
+  name        String
+  category    String   // "Medical" | "Legal" | "Food & Groceries" | "Tech Support & IT" | "Trades" | "Education"
+  description String
+  phone       String
+  website     String?
+  suburb      String   // e.g. "South Bank", "Indooroopilly", "Sunnybank"
+  isApproved  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@index([category])
+  @@index([suburb])
+  @@index([isApproved])
+}
+
+model Notice {
+  id          String   @id @default(cuid())
+  title       String
+  type        String   // "bulk_order" | "job" | "general"
+  content     String
+  contactInfo String
+  createdAt   DateTime @default(now())
+
+  @@index([type])
+}

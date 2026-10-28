@@ -1,0 +1,117 @@
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+async function main() {
+  console.log("Seeding Turkish Brisbane database...");
+
+  // Clean existing records
+  await prisma.business.deleteMany({});
+  await prisma.notice.deleteMany({});
+
+  // Seed Businesses
+  const businesses = [
+    {
+      name: "Bosphorus Meze & Grill",
+      category: "Food & Groceries",
+      description: "Authentic woodfired Turkish pide, slow-cooked lamb shanks, hand-rolled borek, and freshly brewed Turkish tea overlooking South Bank.",
+      phone: "+61 7 3844 5500",
+      website: "https://bosphorusmeze.com.au",
+      suburb: "South Bank",
+      isApproved: true,
+    },
+    {
+      name: "Anatolian IT & Cloud Solutions",
+      category: "Tech Support & IT",
+      description: "Bilingual IT consulting, small business cybersecurity, custom web development, POS systems, and cloud infrastructure for Brisbane businesses.",
+      phone: "+61 400 123 456",
+      website: "https://anatolianit.com.au",
+      suburb: "Indooroopilly",
+      isApproved: true,
+    },
+    {
+      name: "Dr. Aylin Yilmaz Family Clinic",
+      category: "Medical",
+      description: "Experienced bilingual General Practitioner providing comprehensive family healthcare, preventative screenings, and paediatric health in Sunnybank.",
+      phone: "+61 7 3345 8899",
+      website: "https://dryilmazmedical.com.au",
+      suburb: "Sunnybank",
+      isApproved: true,
+    },
+    {
+      name: "Ottoman Legal & Migration Services",
+      category: "Legal",
+      description: "Registered migration agents and Australian legal practitioners specializing in partner visas, skilled migration, commercial leasing, and conveyancing.",
+      phone: "+61 7 3221 7711",
+      website: "https://ottomanlegal.com.au",
+      suburb: "Brisbane CBD",
+      isApproved: true,
+    },
+    {
+      name: "Toros Electrical & Air Conditioning",
+      category: "Trades",
+      description: "Licensed master electrician serving greater Brisbane. Split system air conditioning, solar repairs, switchboard upgrades, and emergency callouts.",
+      phone: "+61 412 888 999",
+      website: "https://toroselectrical.com.au",
+      suburb: "Chermside",
+      isApproved: true,
+    },
+    {
+      name: "Turquoise Language & Tutoring",
+      category: "Education",
+      description: "Weekend Turkish school for kids, adult conversational Turkish lessons, and high school STEM tutoring by accredited Brisbane educators.",
+      phone: "+61 433 777 666",
+      website: "https://turquoisetutoring.com.au",
+      suburb: "Toowong",
+      isApproved: true,
+    },
+  ];
+
+  for (const b of businesses) {
+    await prisma.business.create({ data: b });
+  }
+
+  // Seed Notices
+  const notices = [
+    {
+      title: "Bulk Kurukahveci Mehmet Efendi Turkish Coffee Order (Pallet Import)",
+      type: "bulk_order",
+      content: "Organizing a collective sea freight container order directly from Istanbul to save 40% on bulk fresh Turkish coffee & copper cezves. Pickups in Brisbane Southside.",
+      contactInfo: "WhatsApp: +61 400 999 111 (Emre B.)",
+    },
+    {
+      title: "Spacious Private Room Available for Student/Professional",
+      type: "general",
+      content: "Furnished master bedroom with private ensuite near UQ St Lucia & CityCat terminal. Looking for a tidy, non-smoking Turkish speaker. $280/wk bills included.",
+      contactInfo: "Telegram / SMS: +61 411 222 333 (Zeynep)",
+    },
+    {
+      title: "Urgent: Seeking Bilingual CPA / Tax Accountant for Small Business",
+      type: "job",
+      content: "Local hospitality group seeking a Brisbane-based accountant fluent in English and Turkish for quarterly BAS lodgement and annual company returns.",
+      contactInfo: "Email: accounts@bosphorusmeze.com.au",
+    },
+    {
+      title: "Monthly Community Turkish Breakfast & Networking",
+      type: "general",
+      content: "Join us this coming Sunday at New Farm Park for Turkish tea, simit, feta, and good conversations. Bring your family and lawn chairs!",
+      contactInfo: "WhatsApp Community Group #Events",
+    },
+  ];
+
+  for (const n of notices) {
+    await prisma.notice.create({ data: n });
+  }
+
+  console.log(`Successfully seeded ${businesses.length} businesses and ${notices.length} community notices!`);
+}
+
+main()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
+
