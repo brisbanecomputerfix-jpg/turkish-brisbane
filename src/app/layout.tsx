@@ -41,7 +41,11 @@ export const metadata: Metadata = {
     "Queensland Turkish Expats",
   ],
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/icon.svg",
   },
   openGraph: {
     title: "QLD Turks | Community Hub & Local Directory",

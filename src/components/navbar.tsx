@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { Plus, MessageCircle, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TurkishLogo } from "@/components/ui/turkish-logo";
 
 interface NavbarProps {
   onOpenWhatsApp: () => void;
@@ -17,27 +18,22 @@ export function Navbar({ onOpenWhatsApp, onOpenSubmitBusiness }: NavbarProps) {
     <header className="sticky top-0 z-40 w-full border-b border-zinc-200/80 bg-white/95 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/95">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E30A17] text-white">
-            {/* Turkish Crescent & Star */}
-            <svg
-              viewBox="0 0 100 100"
-              width="20"
-              height="20"
-              className="h-5 w-5 fill-white shrink-0"
-              aria-hidden="true"
-            >
-              <circle cx="50" cy="50" r="30" fill="#ffffff" />
-              <circle cx="58" cy="50" r="24" fill="#E30A17" />
-              <polygon points="68,50 78,53 70,59 73,69 64,63 56,69 59,59 51,53 61,50 64,41" fill="#ffffff" />
-            </svg>
-          </div>
-          <div>
-            <span className="text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
-              QLD Turks
-            </span>
-            <span className="hidden sm:inline-block ml-2 text-xs text-zinc-400 font-normal">
-              Queensland Directory
+        <Link href="/" className="flex items-center gap-3 group">
+          <TurkishLogo
+            size={38}
+            className="transition-transform group-hover:scale-105"
+          />
+          <div className="flex flex-col">
+            <div className="flex items-center gap-2">
+              <span className="text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+                QLD Turks
+              </span>
+              <span className="inline-flex items-center rounded-full bg-red-50 dark:bg-red-950/50 px-2 py-0.5 text-[10px] font-semibold text-[#E30A17] ring-1 ring-inset ring-red-600/10 dark:ring-red-500/20">
+                Türkiye
+              </span>
+            </div>
+            <span className="hidden sm:inline-block text-xs text-zinc-500 dark:text-zinc-400 font-normal">
+              Queensland Community Directory
             </span>
           </div>
         </Link>

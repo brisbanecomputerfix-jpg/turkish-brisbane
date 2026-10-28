@@ -1,6 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { PhoneCall } from "lucide-react";
+import { TurkishLogo } from "@/components/ui/turkish-logo";
 
 export function Footer() {
   return (
@@ -9,24 +10,19 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Col 1: Brand & Mission */}
           <div className="md:col-span-5 space-y-3">
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#E30A17] text-white">
-                <svg
-                  viewBox="0 0 100 100"
-                  width="16"
-                  height="16"
-                  className="h-4 w-4 fill-white shrink-0"
-                  aria-hidden="true"
-                >
-                  <circle cx="50" cy="50" r="30" fill="#ffffff" />
-                  <circle cx="58" cy="50" r="24" fill="#E30A17" />
-                  <polygon points="68,50 78,53 70,59 73,69 64,63 56,69 59,59 51,53 61,50 64,41" fill="#ffffff" />
-                </svg>
+            <div className="flex items-center gap-3">
+              <TurkishLogo size={32} />
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-base font-bold text-zinc-900 dark:text-white">
+                    QLD Turks
+                  </span>
+                  <span className="inline-flex items-center rounded-full bg-red-50 dark:bg-red-950/50 px-2 py-0.5 text-[10px] font-semibold text-[#E30A17] ring-1 ring-inset ring-red-600/10 dark:ring-red-500/20">
+                    Türkiye
+                  </span>
+                </div>
+                <span className="text-xs text-zinc-400 font-mono">qldturks.com</span>
               </div>
-              <span className="text-base font-bold text-zinc-900 dark:text-white">
-                QLD Turks
-              </span>
-              <span className="text-xs text-zinc-400 font-mono">qldturks.com</span>
             </div>
 
             <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-sm">

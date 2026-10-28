@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Search, ArrowRight, MessageCircle, Plus, ShieldCheck, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TurkishLogo } from "@/components/ui/turkish-logo";
 
 interface HeroProps {
   onOpenWhatsApp: () => void;
@@ -13,9 +14,9 @@ export function Hero({ onOpenWhatsApp, onOpenSubmitBusiness }: HeroProps) {
   return (
     <section className="relative pt-16 pb-14 sm:pt-24 sm:pb-20 border-b border-zinc-200/80 bg-white dark:bg-zinc-950 dark:border-zinc-800">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-        {/* Subtle pill tag */}
-        <div className="inline-flex items-center gap-2 rounded-full bg-zinc-100 px-3.5 py-1 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#E30A17]" />
+        {/* Subtle pill tag with official Ay-Yıldız emblem */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3.5 py-1 text-xs font-medium text-zinc-700 shadow-2xs dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+          <TurkishLogo size={16} className="rounded-[4px] shadow-2xs" />
           <span>Queensland Turkish Directory & Community Portal</span>
         </div>
 
