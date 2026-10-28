@@ -34,3 +34,38 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #a1a1aa;
 }
+
+/* Accessibility Modes (WCAG 2.2 Compliant) */
+html.a11y-text-md {
+  font-size: 112.5%;
+}
+html.a11y-text-lg {
+  font-size: 125%;
+}
+
+html.a11y-high-contrast {
+  filter: contrast(1.2);
+}
+html.a11y-high-contrast body {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+html.a11y-high-contrast a {
+  text-decoration: underline !important;
+}
+
+html.a11y-reduced-motion *,
+html.a11y-reduced-motion *::before,
+html.a11y-reduced-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+html.a11y-dyslexic {
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.08em !important;
+  line-height: 1.8 !important;
+}
+

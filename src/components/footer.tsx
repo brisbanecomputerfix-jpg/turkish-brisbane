@@ -1,15 +1,15 @@
 import * as React from "react";
 import Link from "next/link";
-import { PhoneCall } from "lucide-react";
+import { PhoneCall, ShieldCheck, Heart } from "lucide-react";
 import { TurkishLogo } from "@/components/ui/turkish-logo";
 
 export function Footer() {
   return (
     <footer className="border-t border-zinc-200 bg-white text-zinc-600 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* Col 1: Brand & Mission */}
-          <div className="md:col-span-5 space-y-3">
+          <div className="md:col-span-4 space-y-3">
             <div className="flex items-center gap-3">
               <TurkishLogo size={32} />
               <div>
@@ -26,30 +26,69 @@ export function Footer() {
             </div>
 
             <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-sm">
-              An independent, community-moderated directory connecting Turkish-Australians, students, and businesses across Greater Brisbane and Queensland.
+              An independent, community-moderated directory connecting Turkish-Australians, students, and businesses across Greater Brisbane, Gold Coast, and Queensland.
             </p>
+
+            <div className="pt-1 flex items-center gap-2 text-xs text-zinc-400">
+              <ShieldCheck className="h-4 w-4 text-emerald-600 shrink-0" />
+              <span>Australian Business Register (ABR) Verified</span>
+            </div>
           </div>
 
           {/* Col 2: Navigation Links */}
-          <div className="md:col-span-3 space-y-2.5">
+          <div className="md:col-span-2 space-y-2.5">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
-              Quick Links
+              Explore
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm">
               <li>
-                <a href="#directory" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link href="/directory" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
                   Business Directory
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#noticeboard" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-                  Community Noticeboard
-                </a>
+                <Link href="/noticeboard" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                  Noticeboard & Housing
+                </Link>
               </li>
               <li>
-                <a href="#about" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-                  About Community
-                </a>
+                <Link href="/guide" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                  Living in QLD Guide
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                  About & E-E-A-T
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                  Contact & Support
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 3: Legal & Trust */}
+          <div className="md:col-span-2 space-y-2.5">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
+              Trust & Legal
+            </h4>
+            <ul className="space-y-2 text-xs sm:text-sm">
+              <li>
+                <Link href="/about#verification" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                  Verification Standards
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                  Privacy Policy (APPs)
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                  Community Terms
+                </Link>
               </li>
               <li>
                 <Link href="/api/businesses" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors font-mono text-xs">
@@ -59,7 +98,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: Queensland Useful Contacts */}
+          {/* Col 4: Queensland Useful Contacts */}
           <div className="md:col-span-4 space-y-2.5">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
               <PhoneCall className="h-3.5 w-3.5 text-[#E30A17]" />
@@ -82,18 +121,31 @@ export function Footer() {
                 <strong className="text-zinc-800 dark:text-zinc-200">TIS National:</strong>{" "}
                 <a href="tel:131450" className="hover:underline">131 450 (Turkish Interpreter)</a>
               </li>
+              <li>
+                <strong className="text-zinc-800 dark:text-zinc-200">Sydney Consulate:</strong>{" "}
+                <a href="tel:+61293024600" className="hover:underline">+61 2 9302 4600</a>
+              </li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-6 border-t border-zinc-100 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-400">
-          <p>
-            &copy; {new Date().getFullYear()} qldturks.com. Built for the Queensland Turkish Diaspora.
-          </p>
-          <p className="text-zinc-400">
-            Brisbane • Gold Coast • Sunshine Coast • Queensland
-          </p>
+          <div>
+            © {new Date().getFullYear()} qldturks.com. Built with care for the Queensland Turkish Community.
+          </div>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="hover:underline">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:underline">
+              Terms
+            </Link>
+            <Link href="/contact" className="hover:underline">
+              Contact
+            </Link>
+            <span>Brisbane • Gold Coast • Sunshine Coast</span>
+          </div>
         </div>
       </div>
     </footer>
