@@ -8,7 +8,8 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 COPY prisma ./prisma/
-RUN npm ci
+ENV NODE_ENV=development
+RUN npm ci --include=dev
 
 # Rebuild the source code only when needed
 FROM base AS builder
