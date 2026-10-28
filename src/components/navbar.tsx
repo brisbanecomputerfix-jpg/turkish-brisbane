@@ -23,10 +23,10 @@ export function Navbar({ onOpenWhatsApp, onOpenSubmitBusiness }: NavbarProps) {
           </div>
           <div className="flex flex-col">
             <span className="font-extrabold text-lg tracking-tight text-stone-900 dark:text-white leading-none">
-              Turkish Brisbane
+              QLD Turks
             </span>
             <span className="text-[11px] font-medium text-stone-500 dark:text-stone-400">
-              turkishbrisbane.com
+              qldturks.com • Turkish Brisbane
             </span>
           </div>
         </Link>

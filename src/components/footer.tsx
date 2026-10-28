@@ -12,11 +12,11 @@ export function Footer() {
             <div className="flex items-center gap-2">
               <span className="text-xl">🇹🇷</span>
               <span className="text-lg font-bold text-stone-900 dark:text-white">
-                Turkish Brisbane (turkishbrisbane.com)
+                QLD Turks (qldturks.com)
               </span>
             </div>
             <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed max-w-md">
-              An independent, community-driven platform created to connect Turkish-speaking Australians, migrants, students, and businesses in Greater Brisbane and Queensland.
+              An independent, community-driven platform created to connect Turkish-speaking Australians, migrants, students, and businesses across Greater Brisbane and Queensland.
             </p>
             <div className="pt-2 text-xs text-stone-400 flex items-center gap-1.5">
               <span>Built with Next.js, Prisma & Tailwind CSS</span>
