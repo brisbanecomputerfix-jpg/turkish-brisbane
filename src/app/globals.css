@@ -2,62 +2,35 @@
 
 @layer base {
   :root {
-    --background: #fafaf8;
-    --foreground: #1c1917;
+    --background: #ffffff;
+    --foreground: #09090b;
     --turkish-red: #e30a17;
-    --turkish-red-dark: #b91c1c;
-    --turkish-red-light: #fee2e2;
-    --turkish-turquoise: #0d9488;
-    --turkish-turquoise-light: #ccfbf1;
-    --turkish-turquoise-vibrant: #06b6d4;
+    --turkish-red-hover: #c40813;
+    --turkish-red-subtle: #fef2f2;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-/* Glassmorphism helpers */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(229, 231, 235, 0.7);
-}
-
-.glass-panel-dark {
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(51, 65, 85, 0.7);
-}
-
-/* Custom Scrollbar */
+/* Minimalist Clean Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #d4d4d8;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #0d9488;
-}
-
-/* Subtle Animated Shimmer for Badges */
-@keyframes pulse-subtle {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.03); }
-}
-
-.animate-pulse-subtle {
-  animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background: #a1a1aa;
 }

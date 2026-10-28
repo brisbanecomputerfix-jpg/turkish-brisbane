@@ -50,7 +50,7 @@ export function Modal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-stone-950/70 backdrop-blur-md transition-opacity animate-in fade-in duration-200"
+        className="fixed inset-0 bg-zinc-950/40 backdrop-blur-xs transition-opacity animate-in fade-in duration-150"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -61,33 +61,30 @@ export function Modal({
         aria-modal="true"
         aria-labelledby="modal-title"
         className={cn(
-          "relative z-50 w-full overflow-hidden rounded-3xl bg-white p-6 sm:p-7 shadow-2xl transition-all duration-200 dark:bg-stone-900 border border-stone-200/90 dark:border-stone-800/90 my-8",
+          "relative z-50 w-full overflow-hidden rounded-2xl bg-white p-6 shadow-xl transition-all duration-150 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 my-8",
           widthClasses[maxWidth]
         )}
       >
-        {/* Subtle dual-accent gradient top line */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 via-rose-500 to-teal-500" />
-
-        <div className="flex items-start justify-between pb-4 border-b border-stone-100 dark:border-stone-800/80">
+        <div className="flex items-start justify-between pb-4 border-b border-zinc-100 dark:border-zinc-800">
           <div>
             <h3
               id="modal-title"
-              className="text-xl font-bold tracking-tight text-stone-900 dark:text-stone-100"
+              className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100"
             >
               {title}
             </h3>
             {description && (
-              <p className="mt-1 text-xs sm:text-sm text-stone-500 dark:text-stone-400">
+              <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
                 {description}
               </p>
             )}
           </div>
           <button
             onClick={onClose}
-            className="rounded-xl p-1.5 text-stone-400 hover:bg-stone-100 hover:text-stone-700 dark:hover:bg-stone-800 dark:hover:text-stone-200 transition-colors"
+            className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-zinc-200 transition-colors"
             aria-label="Close modal"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
           </button>
         </div>
 

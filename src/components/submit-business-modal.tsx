@@ -5,17 +5,7 @@ import { Modal } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import {
-  Building2,
-  CheckCircle2,
-  AlertCircle,
-  Loader2,
-  Sparkles,
-  MapPin,
-  Phone,
-  Globe,
-  Tag,
-} from "lucide-react";
+import { CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { submitBusinessAction, SubmitBusinessState } from "@/actions/businesses";
 
 interface SubmitBusinessModalProps {
@@ -69,46 +59,35 @@ export function SubmitBusinessModal({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="List Your Business in QLD Turks"
+      title="List Your Business in the Directory"
       description="İşletmenizi Queensland Türk Rehberi'ne ekleyin. Verified listings are 100% free."
       maxWidth="lg"
     >
       {result?.success ? (
-        <div className="py-8 text-center space-y-4 animate-in fade-in duration-200">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-teal-50 text-teal-600 dark:bg-teal-950/60 dark:text-teal-400 shadow-md shadow-teal-500/20">
-            <CheckCircle2 className="h-9 w-9" />
+        <div className="py-6 text-center space-y-4">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400">
+            <CheckCircle2 className="h-6 w-6" />
           </div>
           <div>
-            <h4 className="text-xl font-extrabold text-stone-900 dark:text-white">
-              Teşekkürler! Listing Received
+            <h4 className="text-lg font-bold text-zinc-900 dark:text-white">
+              Listing Submitted
             </h4>
-            <p className="mt-2 text-sm text-stone-600 dark:text-stone-300 max-w-md mx-auto leading-relaxed">
-              Your business has been saved with a <strong className="text-teal-600 dark:text-teal-400">pending moderation</strong> status. Our volunteer community admins will review and publish it within 24-48 hours.
+            <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-300 max-w-sm mx-auto">
+              Your business has been received. Our community admins will review and publish it within 24-48 hours.
             </p>
           </div>
-          <div className="pt-2">
-            <Button
-              type="button"
-              variant="turquoise"
-              onClick={onClose}
-              className="font-bold px-6 shadow-md"
-            >
-              Done & Return to Directory
-            </Button>
-          </div>
+          <Button
+            type="button"
+            onClick={onClose}
+            className="text-xs font-semibold"
+          >
+            Done & Return to Directory
+          </Button>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4 pt-1">
-          {/* Top highlight bar */}
-          <div className="flex items-center gap-2 rounded-xl bg-teal-50/80 p-3 text-xs text-teal-900 border border-teal-200/80 dark:bg-teal-950/30 dark:border-teal-800 dark:text-teal-200">
-            <Sparkles className="h-4 w-4 text-teal-600 dark:text-teal-400 shrink-0" />
-            <span>
-              All submissions are completely free for Australian-Turkish and bilingual service providers across Queensland.
-            </span>
-          </div>
-
           {result?.message && !result.success && (
-            <div className="flex items-center gap-2 rounded-xl bg-red-50 p-3 text-xs text-red-700 border border-red-200 dark:bg-red-950/40 dark:border-red-900 dark:text-red-300">
+            <div className="flex items-center gap-2 rounded-xl bg-red-50 p-3 text-xs text-red-700 border border-red-200">
               <AlertCircle className="h-4 w-4 shrink-0" />
               <span>{result.message}</span>
             </div>
@@ -116,15 +95,14 @@ export function SubmitBusinessModal({
 
           {/* Business Name */}
           <div>
-            <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">
-              Business Name * <span className="font-normal text-stone-400">(İşletme Adı)</span>
+            <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
+              Business Name * <span className="font-normal text-zinc-400">(İşletme Adı)</span>
             </label>
             <Input
               name="name"
               required
-              placeholder="e.g. Anatolia Kebabs & Bakery, Dr. Ayşe Yılmaz"
+              placeholder="e.g. Bosphorus Meze & Grill, Dr. Ayşe Yılmaz"
               disabled={isPending}
-              className="focus-visible:ring-teal-500 focus-visible:border-teal-500"
             />
             {result?.errors?.name && (
               <p className="text-red-500 text-[11px] mt-1">{result.errors.name[0]}</p>
@@ -134,39 +112,36 @@ export function SubmitBusinessModal({
           {/* Category & Suburb row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">
-                Category * <span className="font-normal text-stone-400">(Kategori)</span>
+              <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
+                Category * <span className="font-normal text-zinc-400">(Kategori)</span>
               </label>
-              <div className="relative">
-                <select
-                  name="category"
-                  required
-                  disabled={isPending}
-                  defaultValue="Food & Groceries"
-                  className="flex h-10 w-full rounded-xl border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:border-teal-500 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-100 transition-colors"
-                >
-                  {CATEGORIES.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <select
+                name="category"
+                required
+                disabled={isPending}
+                defaultValue="Food & Groceries"
+                className="flex h-10 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100"
+              >
+                {CATEGORIES.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
               {result?.errors?.category && (
                 <p className="text-red-500 text-[11px] mt-1">{result.errors.category[0]}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">
-                Brisbane Suburb / City * <span className="font-normal text-stone-400">(Semt/Şehir)</span>
+              <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
+                Queensland Suburb / City * <span className="font-normal text-zinc-400">(Semt/Şehir)</span>
               </label>
               <Input
                 name="suburb"
                 required
                 placeholder="e.g. South Bank, Chermside, Gold Coast"
                 disabled={isPending}
-                className="focus-visible:ring-teal-500 focus-visible:border-teal-500"
               />
               {result?.errors?.suburb && (
                 <p className="text-red-500 text-[11px] mt-1">{result.errors.suburb[0]}</p>
@@ -177,16 +152,15 @@ export function SubmitBusinessModal({
           {/* Phone & Website row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">
-                Phone Number * <span className="font-normal text-stone-400">(Telefon Numarası)</span>
+              <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
+                Phone Number * <span className="font-normal text-zinc-400">(Telefon)</span>
               </label>
               <Input
                 name="phone"
                 required
                 type="tel"
-                placeholder="e.g. +61 7 3000 0000 or 0400 123 456"
+                placeholder="e.g. +61 400 123 456"
                 disabled={isPending}
-                className="focus-visible:ring-teal-500 focus-visible:border-teal-500"
               />
               {result?.errors?.phone && (
                 <p className="text-red-500 text-[11px] mt-1">{result.errors.phone[0]}</p>
@@ -194,31 +168,29 @@ export function SubmitBusinessModal({
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">
-                Website or Instagram <span className="font-normal text-stone-400">(İsteğe Bağlı)</span>
+              <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
+                Website or Social URL <span className="font-normal text-zinc-400">(Opsiyonel)</span>
               </label>
               <Input
                 name="website"
                 type="url"
                 placeholder="https://..."
                 disabled={isPending}
-                className="focus-visible:ring-teal-500 focus-visible:border-teal-500"
               />
             </div>
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">
-              Description & Services * <span className="font-normal text-stone-400">(Tanıtım ve Detaylar)</span>
+            <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
+              Description & Services * <span className="font-normal text-zinc-400">(Tanıtım)</span>
             </label>
             <Textarea
               name="description"
               required
               rows={3}
-              placeholder="Tell our community about your specialties, Turkish/English speaking team, menu items, or discounts for students..."
+              placeholder="Describe your specialties, opening hours, bilingual staff, or special offerings..."
               disabled={isPending}
-              className="focus-visible:ring-teal-500 focus-visible:border-teal-500 rounded-xl"
             />
             {result?.errors?.description && (
               <p className="text-red-500 text-[11px] mt-1">{result.errors.description[0]}</p>
@@ -226,13 +198,12 @@ export function SubmitBusinessModal({
           </div>
 
           {/* Buttons */}
-          <div className="flex items-center justify-end gap-3 pt-3 border-t border-stone-100 dark:border-stone-800">
+          <div className="flex items-center justify-end gap-3 pt-3 border-t border-zinc-100 dark:border-zinc-800">
             <Button
               type="button"
               variant="outline"
               onClick={onClose}
               disabled={isPending}
-              className="rounded-xl"
             >
               Cancel
             </Button>
@@ -240,7 +211,7 @@ export function SubmitBusinessModal({
               type="submit"
               disabled={isPending}
               variant="turkish"
-              className="min-w-[140px] font-bold shadow-md shadow-red-600/20 active:scale-95"
+              className="min-w-[120px]"
             >
               {isPending ? (
                 <>

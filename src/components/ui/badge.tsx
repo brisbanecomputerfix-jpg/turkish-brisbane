@@ -7,40 +7,37 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
     | "secondary"
     | "outline"
     | "red"
-    | "turquoise"
     | "emerald"
     | "amber"
     | "blue";
 }
 
-export function Badge({ className, variant = "default", ...props }: BadgeProps) {
-  const variantStyles = {
+function Badge({ className, variant = "default", ...props }: BadgeProps) {
+  const variants = {
     default:
-      "bg-red-50 text-red-700 border-red-200/80 dark:bg-red-950/40 dark:text-red-300 dark:border-red-900/60",
-    red:
-      "bg-red-500/10 text-red-700 border-red-200 dark:bg-red-950/50 dark:text-red-300 dark:border-red-900",
-    turquoise:
-      "bg-teal-50 text-teal-800 border-teal-200/90 dark:bg-teal-950/40 dark:text-teal-300 dark:border-teal-800/60",
+      "border-transparent bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900",
     secondary:
-      "bg-stone-100 text-stone-700 border-stone-200 dark:bg-stone-800 dark:text-stone-300 dark:border-stone-700",
+      "border-zinc-200 bg-zinc-100 text-zinc-700 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-300",
     outline:
-      "border-stone-300 text-stone-700 dark:border-stone-700 dark:text-stone-300",
+      "border-zinc-200 text-zinc-700 dark:border-zinc-800 dark:text-zinc-300 bg-transparent",
+    red: "border-red-100 bg-red-50 text-[#c40813] dark:border-red-950 dark:bg-red-950/40 dark:text-red-300 font-medium",
     emerald:
-      "bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300",
+      "border-emerald-100 bg-emerald-50 text-emerald-700 dark:border-emerald-950 dark:bg-emerald-950/40 dark:text-emerald-300",
     amber:
-      "bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300",
-    blue:
-      "bg-sky-50 text-sky-800 border-sky-200 dark:bg-sky-950/40 dark:text-sky-300",
+      "border-amber-100 bg-amber-50 text-amber-800 dark:border-amber-950 dark:bg-amber-950/40 dark:text-amber-300",
+    blue: "border-blue-100 bg-blue-50 text-blue-700 dark:border-blue-950 dark:bg-blue-950/40 dark:text-blue-300",
   };
 
   return (
     <div
       className={cn(
-        "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold tracking-wide transition-colors focus:outline-none",
-        variantStyles[variant],
+        "inline-flex items-center rounded-lg border px-2.5 py-0.5 text-xs font-medium transition-colors",
+        variants[variant],
         className
       )}
       {...props}
     />
   );
 }
+
+export { Badge };

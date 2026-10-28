@@ -5,15 +5,7 @@ import { Modal } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import {
-  CheckCircle2,
-  AlertCircle,
-  Loader2,
-  Coffee,
-  Briefcase,
-  Bell,
-  Sparkles,
-} from "lucide-react";
+import { CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { submitNoticeAction, SubmitNoticeState } from "@/actions/notices";
 
 interface SubmitNoticeModalProps {
@@ -24,13 +16,11 @@ interface SubmitNoticeModalProps {
 export function SubmitNoticeModal({ isOpen, onClose }: SubmitNoticeModalProps) {
   const [isPending, setIsPending] = React.useState(false);
   const [result, setResult] = React.useState<SubmitNoticeState | null>(null);
-  const [selectedType, setSelectedType] = React.useState("bulk_order");
 
   React.useEffect(() => {
     if (!isOpen) {
       setResult(null);
       setIsPending(false);
-      setSelectedType("bulk_order");
     }
   }, [isOpen]);
 
@@ -40,8 +30,6 @@ export function SubmitNoticeModal({ isOpen, onClose }: SubmitNoticeModalProps) {
     setResult(null);
 
     const formData = new FormData(e.currentTarget);
-    formData.set("type", selectedType);
-
     try {
       const res = await submitNoticeAction(null, formData);
       setResult(res);
@@ -59,152 +47,110 @@ export function SubmitNoticeModal({ isOpen, onClose }: SubmitNoticeModalProps) {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Post a Notice or Bulk Order"
-      description="Topluluk panosuna yeni bir duyuru, iş/ev ilanı veya toplu sipariş ekleyin."
+      title="Post a Community Notice or Order"
+      description="Topluluk panosuna duyuru veya toplu sipariş ekleyin."
       maxWidth="md"
     >
       {result?.success ? (
-        <div className="py-8 text-center space-y-4 animate-in fade-in duration-200">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-teal-50 text-teal-600 dark:bg-teal-950/60 dark:text-teal-400 shadow-md shadow-teal-500/20">
-            <CheckCircle2 className="h-9 w-9" />
+        <div className="py-6 text-center space-y-4">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400">
+            <CheckCircle2 className="h-6 w-6" />
           </div>
           <div>
-            <h4 className="text-xl font-extrabold text-stone-900 dark:text-white">
-              Duyurunuz Yayında! • Notice Published
+            <h4 className="text-lg font-bold text-zinc-900 dark:text-white">
+              Notice Published
             </h4>
-            <p className="mt-2 text-sm text-stone-600 dark:text-stone-300 max-w-sm mx-auto leading-relaxed">
-              Your notice is now live on the Brisbane & Queensland Turkish community board.
+            <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-300">
+              Your announcement is now live on the Queensland noticeboard.
             </p>
           </div>
-          <div className="pt-2">
-            <Button
-              type="button"
-              variant="turquoise"
-              onClick={onClose}
-              className="font-bold px-6 shadow-md"
-            >
-              Done & View Noticeboard
-            </Button>
-          </div>
+          <Button
+            type="button"
+            onClick={onClose}
+            className="text-xs font-semibold"
+          >
+            Done
+          </Button>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4 pt-1">
           {result?.message && !result.success && (
-            <div className="flex items-center gap-2 rounded-xl bg-red-50 p-3 text-xs text-red-700 border border-red-200 dark:bg-red-950/40 dark:border-red-900 dark:text-red-300">
+            <div className="flex items-center gap-2 rounded-xl bg-red-50 p-3 text-xs text-red-700 border border-red-200">
               <AlertCircle className="h-4 w-4 shrink-0" />
               <span>{result.message}</span>
             </div>
           )}
 
-          {/* Type Selector (Interactive Cards) */}
           <div>
-            <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1.5">
-              Notice Category * <span className="font-normal text-stone-400">(İlan Türü)</span>
-            </label>
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                type="button"
-                onClick={() => setSelectedType("bulk_order")}
-                className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
-                  selectedType === "bulk_order"
-                    ? "border-teal-500 bg-teal-50 text-teal-900 dark:bg-teal-950/40 dark:border-teal-500 dark:text-teal-200 shadow-xs"
-                    : "border-stone-200 bg-white text-stone-600 hover:bg-stone-50 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-400"
-                }`}
-              >
-                <Coffee className="h-4 w-4 mx-auto mb-1 text-teal-600 dark:text-teal-400" />
-                <span className="text-[11px] font-bold block leading-tight">Bulk Order</span>
-                <span className="text-[9px] text-stone-400 block">Toplu Sipariş</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setSelectedType("job")}
-                className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
-                  selectedType === "job"
-                    ? "border-emerald-500 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/40 dark:border-emerald-500 dark:text-emerald-200 shadow-xs"
-                    : "border-stone-200 bg-white text-stone-600 hover:bg-stone-50 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-400"
-                }`}
-              >
-                <Briefcase className="h-4 w-4 mx-auto mb-1 text-emerald-600 dark:text-emerald-400" />
-                <span className="text-[11px] font-bold block leading-tight">Job / Housing</span>
-                <span className="text-[9px] text-stone-400 block">İş & Ev İlanı</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setSelectedType("general")}
-                className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
-                  selectedType === "general"
-                    ? "border-red-500 bg-red-50 text-red-900 dark:bg-red-950/40 dark:border-red-500 dark:text-red-200 shadow-xs"
-                    : "border-stone-200 bg-white text-stone-600 hover:bg-stone-50 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-400"
-                }`}
-              >
-                <Bell className="h-4 w-4 mx-auto mb-1 text-red-600 dark:text-red-400" />
-                <span className="text-[11px] font-bold block leading-tight">Community</span>
-                <span className="text-[9px] text-stone-400 block">Duyuru & Etkinlik</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Title */}
-          <div>
-            <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">
-              Title * <span className="font-normal text-stone-400">(Başlık)</span>
+            <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
+              Title * <span className="font-normal text-zinc-400">(Başlık)</span>
             </label>
             <Input
               name="title"
               required
               placeholder="e.g. Kurukahveci Mehmet Efendi 500g Group Buy, Room in Toowong"
               disabled={isPending}
-              className="focus-visible:ring-teal-500 focus-visible:border-teal-500"
             />
           </div>
 
-          {/* Contact Info */}
-          <div>
-            <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">
-              Contact Info * <span className="font-normal text-stone-400">(İletişim Bilgisi)</span>
-            </label>
-            <Input
-              name="contactInfo"
-              required
-              placeholder="WhatsApp: +61 400 123 456 or contact@example.com"
-              disabled={isPending}
-              className="focus-visible:ring-teal-500 focus-visible:border-teal-500"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
+                Notice Type * <span className="font-normal text-zinc-400">(Tür)</span>
+              </label>
+              <select
+                name="type"
+                required
+                defaultValue="bulk_order"
+                disabled={isPending}
+                className="flex h-10 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100"
+              >
+                <option value="bulk_order">Bulk Order / Toplu Sipariş</option>
+                <option value="job">Job or Room Rental / İlan</option>
+                <option value="general">General / Genel Duyuru</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
+                Contact Info * <span className="font-normal text-zinc-400">(İletişim)</span>
+              </label>
+              <Input
+                name="contactInfo"
+                required
+                placeholder="WhatsApp, Phone, or Email"
+                disabled={isPending}
+              />
+            </div>
           </div>
 
-          {/* Details / Content */}
           <div>
-            <label className="block text-xs font-bold text-stone-700 dark:text-stone-300 mb-1">
-              Details & Instructions * <span className="font-normal text-stone-400">(Detaylar ve Koşullar)</span>
+            <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
+              Details * <span className="font-normal text-zinc-400">(Açıklama)</span>
             </label>
             <Textarea
               name="content"
               required
               rows={4}
-              placeholder="Provide exact pricing, pickup suburb (e.g. Sunnybank, Kangaroo Point), estimated delivery date, or vacancy requirements..."
+              placeholder="Provide exact pricing, pickup location, delivery timeline, or conditions..."
               disabled={isPending}
-              className="focus-visible:ring-teal-500 focus-visible:border-teal-500 rounded-xl"
             />
           </div>
 
-          {/* Buttons */}
-          <div className="flex items-center justify-end gap-3 pt-3 border-t border-stone-100 dark:border-stone-800">
+          <div className="flex items-center justify-end gap-3 pt-3 border-t border-zinc-100 dark:border-zinc-800">
             <Button
               type="button"
               variant="outline"
               onClick={onClose}
               disabled={isPending}
-              className="rounded-xl"
             >
               Cancel
             </Button>
             <Button
               type="submit"
               disabled={isPending}
-              variant="turquoise"
-              className="min-w-[140px] font-bold shadow-md shadow-teal-500/20 active:scale-95"
+              variant="turkish"
+              className="min-w-[120px]"
             >
               {isPending ? (
                 <>
@@ -212,7 +158,7 @@ export function SubmitNoticeModal({ isOpen, onClose }: SubmitNoticeModalProps) {
                   Posting...
                 </>
               ) : (
-                "Post Notice Now"
+                "Post Notice"
               )}
             </Button>
           </div>

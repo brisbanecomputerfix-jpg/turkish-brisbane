@@ -1,14 +1,14 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-export const Card = React.forwardRef<
+const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
-      "rounded-2xl border border-stone-200/80 bg-white text-stone-900 shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-stone-200/50 hover:-translate-y-0.5 dark:border-stone-800/90 dark:bg-stone-900/90 dark:text-stone-100 dark:hover:shadow-black/40",
+      "rounded-2xl border border-zinc-200/80 bg-white text-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-50 transition-all duration-150 hover:border-zinc-300 dark:hover:border-zinc-700",
       className
     )}
     {...props}
@@ -16,7 +16,7 @@ export const Card = React.forwardRef<
 ));
 Card.displayName = "Card";
 
-export const CardHeader = React.forwardRef<
+const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -28,14 +28,14 @@ export const CardHeader = React.forwardRef<
 ));
 CardHeader.displayName = "CardHeader";
 
-export const CardTitle = React.forwardRef<
+const CardTitle = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
     className={cn(
-      "text-xl font-bold leading-tight tracking-tight text-stone-900 dark:text-white",
+      "text-base font-semibold leading-tight tracking-tight text-zinc-900 dark:text-zinc-100",
       className
     )}
     {...props}
@@ -43,22 +43,19 @@ export const CardTitle = React.forwardRef<
 ));
 CardTitle.displayName = "CardTitle";
 
-export const CardDescription = React.forwardRef<
+const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn(
-      "text-sm text-stone-500 dark:text-stone-400 leading-relaxed",
-      className
-    )}
+    className={cn("text-xs text-zinc-500 dark:text-zinc-400", className)}
     {...props}
   />
 ));
 CardDescription.displayName = "CardDescription";
 
-export const CardContent = React.forwardRef<
+const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -66,7 +63,7 @@ export const CardContent = React.forwardRef<
 ));
 CardContent.displayName = "CardContent";
 
-export const CardFooter = React.forwardRef<
+const CardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -77,3 +74,5 @@ export const CardFooter = React.forwardRef<
   />
 ));
 CardFooter.displayName = "CardFooter";
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };

@@ -1,23 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  Coffee,
-  Briefcase,
-  Bell,
-  MessageSquare,
-  Plus,
-  Calendar,
-  UserCheck,
-  Copy,
-  Check,
-  Sparkles,
-  Phone,
-  Mail,
-  ExternalLink,
-} from "lucide-react";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Plus, Calendar, Copy, Check, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface NoticeItem {
@@ -46,50 +30,20 @@ export function NoticeboardSection({
     return initialNotices.filter((n) => n.type === filterType);
   }, [initialNotices, filterType]);
 
-  const counts = React.useMemo(() => {
-    return {
-      all: initialNotices.length,
-      bulk_order: initialNotices.filter((n) => n.type === "bulk_order").length,
-      job: initialNotices.filter((n) => n.type === "job").length,
-      general: initialNotices.filter((n) => n.type === "general").length,
-    };
-  }, [initialNotices]);
-
   const handleCopyContact = (id: string, text: string) => {
     navigator.clipboard?.writeText(text);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const getNoticeTheme = (type: string) => {
+  const getNoticeBadge = (type: string) => {
     switch (type) {
       case "bulk_order":
-        return {
-          label: "Bulk Order / Toplu Sipariş",
-          badgeVariant: "turquoise" as const,
-          icon: Coffee,
-          accentBar: "from-teal-500 to-cyan-500",
-          cardBorder: "hover:border-teal-400/50 dark:hover:border-teal-500/40",
-          iconBg: "bg-teal-50 text-teal-700 dark:bg-teal-950/50 dark:text-teal-300",
-        };
+        return { label: "Bulk Order", style: "bg-amber-50 text-amber-800 border-amber-200/80" };
       case "job":
-        return {
-          label: "Job & Housing / İlan",
-          badgeVariant: "emerald" as const,
-          icon: Briefcase,
-          accentBar: "from-emerald-500 to-teal-600",
-          cardBorder: "hover:border-emerald-400/50 dark:hover:border-emerald-500/40",
-          iconBg: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300",
-        };
+        return { label: "Job / Housing", style: "bg-emerald-50 text-emerald-800 border-emerald-200/80" };
       default:
-        return {
-          label: "Community / Duyuru",
-          badgeVariant: "red" as const,
-          icon: Bell,
-          accentBar: "from-red-600 to-rose-600",
-          cardBorder: "hover:border-red-400/50 dark:hover:border-red-500/40",
-          iconBg: "bg-red-50 text-red-700 dark:bg-red-950/50 dark:text-red-300",
-        };
+        return { label: "Community", style: "bg-zinc-100 text-zinc-700 border-zinc-200" };
     }
   };
 
@@ -105,240 +59,153 @@ export function NoticeboardSection({
   return (
     <section
       id="noticeboard"
-      className="relative py-20 sm:py-24 bg-stone-50/80 dark:bg-stone-900/30 border-y border-stone-200/80 dark:border-stone-800 scroll-mt-16 overflow-hidden"
+      className="py-16 sm:py-20 border-t border-zinc-200 bg-zinc-50/50 dark:bg-zinc-900/30 dark:border-zinc-800 scroll-mt-16"
     >
-      {/* Background ambient decorative glow */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-red-600/5 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Block */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-stone-200/90 dark:border-stone-800">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-zinc-200 dark:border-zinc-800">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-teal-200/80 bg-teal-50/90 px-3 py-1 text-xs font-semibold text-teal-800 dark:border-teal-800/60 dark:bg-teal-950/50 dark:text-teal-300 shadow-sm">
-              <Sparkles className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400 animate-pulse" />
-              <span>Direct Community Board • Topluluk Panosu</span>
-            </div>
-
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-stone-900 dark:text-white sm:text-4xl">
-              Notices, Bulk Orders &{" "}
-              <span className="bg-gradient-to-r from-red-600 via-rose-600 to-teal-600 bg-clip-text text-transparent">
-                Classifieds
-              </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+              Community Noticeboard
             </h2>
-            <p className="mt-2 text-stone-600 dark:text-stone-300 text-sm sm:text-base max-w-2xl leading-relaxed">
-              Import group buys (Kurukahveci Mehmet Efendi, Aegean olive oil, Turkish tea), room rentals, job offers, and local Queensland gatherings.
+            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+              Bulk imports (Turkish coffee, olive oil), room rentals, job leads, and local announcements.
             </p>
           </div>
 
           <Button
             onClick={onOpenSubmitNotice}
-            variant="turquoise"
-            className="gap-2 shrink-0 shadow-lg shadow-teal-500/20 active:scale-95 transition-transform"
+            variant="outline"
+            size="sm"
+            className="gap-1.5 self-start md:self-auto"
           >
             <Plus className="h-4 w-4" />
-            Post a Notice (Duyuru Ekle)
+            <span>Post a Notice</span>
           </Button>
         </div>
 
-        {/* Filter Pills with Counters */}
-        <div className="mt-8 flex flex-wrap items-center gap-2.5">
+        {/* Minimal Filters */}
+        <div className="mt-6 flex flex-wrap items-center gap-2">
           <button
             onClick={() => setFilterType("all")}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold cursor-pointer transition-all ${
+            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
               filterType === "all"
-                ? "bg-gradient-to-r from-stone-900 to-stone-800 text-white shadow-md dark:from-stone-100 dark:to-stone-200 dark:text-stone-900"
-                : "bg-white text-stone-700 border border-stone-200/90 hover:bg-stone-100/80 dark:bg-stone-900 dark:text-stone-300 dark:border-stone-800"
+                ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-400"
             }`}
           >
-            All Notices
-            <span
-              className={`rounded-full px-2 py-0.5 text-[10px] font-extrabold ${
-                filterType === "all"
-                  ? "bg-stone-700 text-stone-100 dark:bg-stone-300 dark:text-stone-900"
-                  : "bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-300"
-              }`}
-            >
-              {counts.all}
-            </span>
+            All Notices ({initialNotices.length})
           </button>
-
           <button
             onClick={() => setFilterType("bulk_order")}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold cursor-pointer transition-all ${
+            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
               filterType === "bulk_order"
-                ? "bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-md shadow-teal-600/25"
-                : "bg-white text-stone-700 border border-stone-200/90 hover:border-teal-400 hover:text-teal-700 dark:bg-stone-900 dark:text-stone-300 dark:border-stone-800"
+                ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-400"
             }`}
           >
-            <Coffee className="h-3.5 w-3.5 text-teal-500" />
             Bulk Orders & Imports
-            <span
-              className={`rounded-full px-2 py-0.5 text-[10px] font-extrabold ${
-                filterType === "bulk_order"
-                  ? "bg-teal-700/60 text-white"
-                  : "bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-300"
-              }`}
-            >
-              {counts.bulk_order}
-            </span>
           </button>
-
           <button
             onClick={() => setFilterType("job")}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold cursor-pointer transition-all ${
+            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
               filterType === "job"
-                ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/25"
-                : "bg-white text-stone-700 border border-stone-200/90 hover:border-emerald-400 hover:text-emerald-700 dark:bg-stone-900 dark:text-stone-300 dark:border-stone-800"
+                ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-400"
             }`}
           >
-            <Briefcase className="h-3.5 w-3.5 text-emerald-500" />
             Jobs & Housing
-            <span
-              className={`rounded-full px-2 py-0.5 text-[10px] font-extrabold ${
-                filterType === "job"
-                  ? "bg-emerald-700/60 text-white"
-                  : "bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-300"
-              }`}
-            >
-              {counts.job}
-            </span>
           </button>
-
           <button
             onClick={() => setFilterType("general")}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold cursor-pointer transition-all ${
+            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
               filterType === "general"
-                ? "bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-md shadow-red-600/25"
-                : "bg-white text-stone-700 border border-stone-200/90 hover:border-red-400 hover:text-red-700 dark:bg-stone-900 dark:text-stone-300 dark:border-stone-800"
+                ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-400"
             }`}
           >
-            <Bell className="h-3.5 w-3.5 text-red-500" />
-            Community & Events
-            <span
-              className={`rounded-full px-2 py-0.5 text-[10px] font-extrabold ${
-                filterType === "general"
-                  ? "bg-red-700/60 text-white"
-                  : "bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-300"
-              }`}
-            >
-              {counts.general}
-            </span>
+            General & Events
           </button>
         </div>
 
-        {/* Bento Notice Cards Grid */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Notices Grid */}
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5">
           {filteredNotices.map((notice) => {
-            const theme = getNoticeTheme(notice.type);
-            const IconComponent = theme.icon;
-            const isPhone = notice.contactInfo.match(/(\+?\d[\d\s-]{7,})/);
-            const isEmail = notice.contactInfo.includes("@");
+            const badge = getNoticeBadge(notice.type);
 
             return (
-              <Card
+              <div
                 key={notice.id}
-                className={`relative flex flex-col justify-between overflow-hidden border-stone-200/90 dark:border-stone-800 bg-white dark:bg-stone-900/90 shadow-sm transition-all duration-300 ${theme.cardBorder}`}
+                className="flex flex-col justify-between rounded-2xl border border-zinc-200/90 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 shadow-xs"
               >
-                {/* Top ambient color bar indicating notice type */}
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${theme.accentBar}`} />
-
-                <CardHeader className="pt-6 pb-3">
-                  <div className="flex items-center justify-between gap-3 flex-wrap">
-                    <Badge variant={theme.badgeVariant} className="gap-1.5 shadow-xs">
-                      <IconComponent className="h-3 w-3" />
-                      {theme.label}
-                    </Badge>
-
-                    <span className="flex items-center gap-1.5 text-xs text-stone-400 dark:text-stone-500 font-medium">
-                      <Calendar className="h-3.5 w-3.5" />
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span
+                      className={`rounded-md border px-2 py-0.5 text-[11px] font-medium ${badge.style}`}
+                    >
+                      {badge.label}
+                    </span>
+                    <span className="flex items-center gap-1 text-[11px] text-zinc-400">
+                      <Calendar className="h-3 w-3" />
                       {formatDate(notice.createdAt)}
                     </span>
                   </div>
 
-                  <CardTitle className="mt-3 text-lg font-bold text-stone-900 dark:text-white leading-snug tracking-tight">
+                  <h3 className="mt-3 font-semibold text-base text-zinc-900 dark:text-zinc-100 leading-snug">
                     {notice.title}
-                  </CardTitle>
-                </CardHeader>
+                  </h3>
 
-                <CardContent className="flex-1 pb-4">
-                  <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed whitespace-pre-line">
+                  <p className="mt-2.5 text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed whitespace-pre-line">
                     {notice.content}
                   </p>
-                </CardContent>
+                </div>
 
-                <CardFooter className="pt-3.5 pb-3.5 border-t border-stone-100 dark:border-stone-800/80 bg-stone-50/70 dark:bg-stone-900/60 rounded-b-2xl">
-                  <div className="flex items-center justify-between gap-3 w-full">
-                    {/* Contact info presentation */}
-                    <div className="flex items-center gap-2 text-xs text-stone-700 dark:text-stone-300 min-w-0">
-                      <div className={`flex h-6 w-6 items-center justify-center rounded-md ${theme.iconBg} shrink-0`}>
-                        {isEmail ? (
-                          <Mail className="h-3.5 w-3.5" />
-                        ) : isPhone ? (
-                          <Phone className="h-3.5 w-3.5" />
-                        ) : (
-                          <UserCheck className="h-3.5 w-3.5" />
-                        )}
-                      </div>
-                      <div className="min-w-0">
-                        <span className="text-[10px] uppercase font-bold text-stone-400 dark:text-stone-500 block leading-tight">
-                          Contact
-                        </span>
-                        <span className="truncate font-mono text-xs font-semibold text-stone-800 dark:text-stone-200 select-all block">
-                          {notice.contactInfo}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Copy button */}
-                    <button
-                      onClick={() => handleCopyContact(notice.id, notice.contactInfo)}
-                      className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer shrink-0 ${
-                        copiedId === notice.id
-                          ? "bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800"
-                          : "bg-white text-stone-600 border border-stone-200 hover:bg-stone-100 hover:text-stone-900 dark:bg-stone-800 dark:text-stone-300 dark:border-stone-700"
-                      }`}
-                      title="Copy contact details"
-                    >
-                      {copiedId === notice.id ? (
-                        <>
-                          <Check className="h-3 w-3 text-emerald-600" />
-                          <span>Copied!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="h-3 w-3 text-stone-400" />
-                          <span>Copy</span>
-                        </>
-                      )}
-                    </button>
+                {/* Footer / Contact */}
+                <div className="mt-5 pt-3.5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs">
+                  <div className="text-zinc-600 dark:text-zinc-400 truncate mr-3">
+                    <span className="text-[11px] text-zinc-400 uppercase font-medium mr-1.5">
+                      Contact:
+                    </span>
+                    <span className="font-mono text-xs font-medium text-zinc-800 dark:text-zinc-200 select-all">
+                      {notice.contactInfo}
+                    </span>
                   </div>
-                </CardFooter>
-              </Card>
+
+                  <button
+                    onClick={() => handleCopyContact(notice.id, notice.contactInfo)}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800 transition-colors cursor-pointer shrink-0"
+                  >
+                    {copiedId === notice.id ? (
+                      <>
+                        <Check className="h-3.5 w-3.5 text-emerald-600" />
+                        <span>Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-3.5 w-3.5 text-zinc-400" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
             );
           })}
         </div>
 
-        {/* Empty state */}
+        {/* Empty State */}
         {filteredNotices.length === 0 && (
-          <div className="mt-8 rounded-3xl border border-dashed border-stone-300 dark:border-stone-800 bg-white/70 dark:bg-stone-900/60 p-12 text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 text-teal-600 dark:bg-teal-950/50 dark:text-teal-400">
-              <Coffee className="h-7 w-7" />
-            </div>
-            <h3 className="mt-4 text-base font-bold text-stone-900 dark:text-white">
-              No notices under this filter
-            </h3>
-            <p className="mt-1 text-xs text-stone-500 dark:text-stone-400 max-w-sm mx-auto">
-              Be the first to create an announcement or initiate a bulk food import order for Queensland.
+          <div className="mt-8 rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-800 p-10 text-center bg-white dark:bg-zinc-900">
+            <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+              No notices currently posted under this category.
             </p>
             <Button
               onClick={onOpenSubmitNotice}
-              variant="turquoise"
+              variant="outline"
               size="sm"
-              className="mt-4 gap-1.5"
+              className="mt-3"
             >
-              <Plus className="h-3.5 w-3.5" />
-              Post Notice Now
+              Post the First Notice
             </Button>
           </div>
         )}
