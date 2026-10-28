@@ -110,3 +110,4 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
     </div>
   );
 }
+

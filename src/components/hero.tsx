@@ -113,3 +113,4 @@ export function Hero({ onOpenWhatsApp, onOpenSubmitBusiness }: HeroProps) {
     </section>
   );
 }
+

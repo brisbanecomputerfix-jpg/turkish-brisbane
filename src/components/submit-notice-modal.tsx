@@ -166,3 +166,4 @@ export function SubmitNoticeModal({ isOpen, onClose }: SubmitNoticeModalProps) {
     </Modal>
   );
 }
+

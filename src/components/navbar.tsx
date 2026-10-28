@@ -142,3 +142,4 @@ export function Navbar({ onOpenWhatsApp, onOpenSubmitBusiness }: NavbarProps) {
     </header>
   );
 }
+
