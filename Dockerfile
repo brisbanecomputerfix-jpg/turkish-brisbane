@@ -16,16 +16,21 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Dummy DATABASE_URL for build phase
+ENV DATABASE_URL="postgresql://postgres:postgres@localhost:5432/dummy"
+ENV NEXT_TELEMETRY_DISABLED=1
+
 # Generate Prisma Client
 RUN npx prisma generate
 
 # Build Next.js
-ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
-# Production image, copy all the files and run next
+# Production image, copy all files and run Next.js
 FROM base AS runner
 WORKDIR /app
+
+RUN apk add --no-cache openssl
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -45,5 +50,5 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["npm", "run", "start"]
-
+# Auto-sync Prisma schema to PostgreSQL on container boot, then start Next.js
+CMD ["sh", "-c", "npx prisma db push --skip-generate && npm run start"]
