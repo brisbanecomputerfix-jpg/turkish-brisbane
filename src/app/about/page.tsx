@@ -86,8 +86,8 @@ export default function AboutPage() {
           {/* Hero Image / Editorial Banner */}
           <div className="mt-12 relative overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 shadow-md">
             <img
-              src="https://images.unsplash.com/photo-1577971132992-0b8981e59275?auto=format&fit=crop&w=1400&q=80"
-              alt="Brisbane River and Story Bridge skyline"
+              src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1400&q=80"
+              alt="Queensland waterfront and skyline"
               className="h-72 sm:h-96 w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
@@ -254,3 +254,4 @@ export default function AboutPage() {
     </>
   );
 }
+
