@@ -18,16 +18,18 @@ export function Navbar({ onOpenWhatsApp, onOpenSubmitBusiness }: NavbarProps) {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand */}
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E30A17] text-white">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E30A17] text-white">
             {/* Turkish Crescent & Star */}
             <svg
               viewBox="0 0 100 100"
-              className="h-5 w-5 fill-white"
+              width="20"
+              height="20"
+              className="h-5 w-5 fill-white shrink-0"
               aria-hidden="true"
             >
-              <circle cx="50" cy="50" r="30" />
-              <circle cx="58" cy="50" r="24" className="fill-[#E30A17]" />
-              <polygon points="68,50 78,53 70,59 73,69 64,63 56,69 59,59 51,53 61,50 64,41" />
+              <circle cx="50" cy="50" r="30" fill="#ffffff" />
+              <circle cx="58" cy="50" r="24" fill="#E30A17" />
+              <polygon points="68,50 78,53 70,59 73,69 64,63 56,69 59,59 51,53 61,50 64,41" fill="#ffffff" />
             </svg>
           </div>
           <div>

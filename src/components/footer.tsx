@@ -10,15 +10,17 @@ export function Footer() {
           {/* Col 1: Brand & Mission */}
           <div className="md:col-span-5 space-y-3">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#E30A17] text-white">
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#E30A17] text-white">
                 <svg
                   viewBox="0 0 100 100"
-                  className="h-4 w-4 fill-white"
+                  width="16"
+                  height="16"
+                  className="h-4 w-4 fill-white shrink-0"
                   aria-hidden="true"
                 >
-                  <circle cx="50" cy="50" r="30" />
-                  <circle cx="58" cy="50" r="24" className="fill-[#E30A17]" />
-                  <polygon points="68,50 78,53 70,59 73,69 64,63 56,69 59,59 51,53 61,50 64,41" />
+                  <circle cx="50" cy="50" r="30" fill="#ffffff" />
+                  <circle cx="58" cy="50" r="24" fill="#E30A17" />
+                  <polygon points="68,50 78,53 70,59 73,69 64,63 56,69 59,59 51,53 61,50 64,41" fill="#ffffff" />
                 </svg>
               </div>
               <span className="text-base font-bold text-zinc-900 dark:text-white">
