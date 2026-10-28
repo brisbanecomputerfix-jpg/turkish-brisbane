@@ -2,6 +2,9 @@ import prisma from "@/lib/prisma";
 import { HomeClient } from "@/components/home-client";
 import { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: "Turkish Brisbane | Local Business Directory & Community Hub",
   description:
