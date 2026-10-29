@@ -112,3 +112,4 @@ export const DEFAULT_BUSINESSES: BusinessItem[] = [
     isApproved: true,
   },
 ];
+

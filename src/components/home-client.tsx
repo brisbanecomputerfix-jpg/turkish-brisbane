@@ -102,7 +102,7 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
 
             {/* Pillar 2 */}
             <Link
-              href="/blog/creating-a-unified-turkish-job-pool-queensland"
+              href="/jobs"
               className="group relative flex flex-col justify-between rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:border-blue-500/40 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900"
             >
               <div>
@@ -122,7 +122,7 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
                 </div>
               </div>
               <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
-                <span>View career strategy</span>
+                <span>Explore Jobs & Talent Pool</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </div>
             </Link>

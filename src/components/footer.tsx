@@ -47,6 +47,12 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/jobs" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors flex items-center gap-1.5">
+                  <span>Careers & Job Pool</span>
+                  <span className="text-[9px] bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-1.5 py-0.2 rounded font-bold">Hiring</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/noticeboard" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
                   Noticeboard & Housing
                 </Link>

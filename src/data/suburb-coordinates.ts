@@ -40,3 +40,4 @@ export function getBusinessCoordinates(suburb: string, businessId: string): LatL
     lng: base.lng + lngOffset,
   };
 }
+

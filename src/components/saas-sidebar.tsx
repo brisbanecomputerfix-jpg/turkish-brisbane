@@ -27,6 +27,7 @@ import {
   GraduationCap,
   ExternalLink,
   Map as MapIcon,
+  Briefcase,
 } from "lucide-react";
 
 export function SaasSidebar() {
@@ -63,6 +64,7 @@ export function SaasSidebar() {
     { href: "/", label: "Home", icon: Home, exact: true },
     { href: "/directory", label: "Business Directory", icon: Building2, badge: "Verified" },
     { href: "/directory/map", label: "Interactive Map", icon: MapIcon, badge: "Map" },
+    { href: "/jobs", label: "Careers & Job Pool", icon: Briefcase, badge: "Hiring" },
     { href: "/noticeboard", label: "Noticeboard", icon: BellRing, badge: "Active" },
     { href: "/guide", label: "Living in QLD Guide", icon: BookOpen },
     { href: "/blog", label: "Insights & Playbooks", icon: BookOpen, badge: "New" },
