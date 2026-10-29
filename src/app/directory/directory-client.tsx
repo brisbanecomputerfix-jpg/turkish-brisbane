@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import { useApp } from "@/context/app-context";
 import { BusinessItem } from "@/components/directory-section";
@@ -22,7 +23,25 @@ import {
   Sparkles,
   ExternalLink,
   CheckCircle2,
+  LayoutGrid,
+  Map as MapIcon,
+  Navigation,
 } from "lucide-react";
+
+const DirectoryMap = dynamic(
+  () => import("@/components/directory-map").then((mod) => mod.DirectoryMap),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex h-[600px] w-full items-center justify-center rounded-2xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50">
+        <div className="flex flex-col items-center gap-2 text-zinc-400">
+          <div className="h-6 w-6 animate-spin rounded-full border-2 border-red-500 border-t-transparent" />
+          <span className="text-xs font-medium">Loading Interactive Queensland Map...</span>
+        </div>
+      </div>
+    ),
+  }
+);
 
 const CATEGORIES = [
   "All",
@@ -106,15 +125,25 @@ const CATEGORY_CARDS = [
 export function DirectoryClient({ initialBusinesses }: { initialBusinesses: BusinessItem[] }) {
   const searchParams = useSearchParams();
   const initialCat = searchParams.get("category") || "All";
+  const initialView = searchParams.get("view") === "map" ? "map" : "grid";
   const { setSubmitBusinessOpen } = useApp();
 
   const [selectedCategory, setSelectedCategory] = React.useState<string>(initialCat);
   const [selectedSuburb, setSelectedSuburb] = React.useState<string>("All Suburbs");
   const [searchQuery, setSearchQuery] = React.useState<string>("");
+  const [viewMode, setViewMode] = React.useState<"grid" | "map">(initialView);
+  const [selectedBusinessId, setSelectedBusinessId] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     const cat = searchParams.get("category");
     if (cat) setSelectedCategory(cat);
+  }, [searchParams]);
+
+  React.useEffect(() => {
+    const view = searchParams.get("view");
+    if (view === "map" || view === "grid") {
+      setViewMode(view);
+    }
   }, [searchParams]);
 
   const filteredBusinesses = React.useMemo(() => {
@@ -280,78 +309,189 @@ export function DirectoryClient({ initialBusinesses }: { initialBusinesses: Busi
           </div>
         </div>
 
-        {/* Results Counter & Verified Note */}
-        <div className="mt-8 flex items-center justify-between text-xs text-zinc-500">
-          <span>
-            Showing <strong className="text-zinc-900 dark:text-zinc-100">{filteredBusinesses.length}</strong> verified businesses
-          </span>
-          <span className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-medium">
-            <CheckCircle2 className="h-3.5 w-3.5" />
-            <span>Community Vetted & Active</span>
-          </span>
+        {/* Results Counter, Verified Note & View Mode Toggle */}
+        <div className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs text-zinc-500">
+          <div className="flex items-center gap-3">
+            <span>
+              Showing <strong className="text-zinc-900 dark:text-zinc-100">{filteredBusinesses.length}</strong> verified businesses
+            </span>
+            <span className="hidden sm:inline-flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-medium">
+              <CheckCircle2 className="h-3.5 w-3.5" />
+              <span>Community Vetted & Active</span>
+            </span>
+          </div>
+
+          {/* View Mode Switcher */}
+          <div className="flex items-center rounded-xl border border-zinc-200 bg-white p-1 dark:border-zinc-800 dark:bg-zinc-900 shadow-2xs">
+            <button
+              type="button"
+              onClick={() => setViewMode("grid")}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                viewMode === "grid"
+                  ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-xs"
+                  : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+              }`}
+            >
+              <LayoutGrid className="h-3.5 w-3.5" />
+              <span>Grid View</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode("map")}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                viewMode === "map"
+                  ? "bg-[#E30A17] text-white shadow-xs"
+                  : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+              }`}
+            >
+              <MapIcon className="h-3.5 w-3.5" />
+              <span>Interactive Map</span>
+            </button>
+          </div>
         </div>
 
-        {/* Business Grid */}
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredBusinesses.map((b) => (
-            <div
-              key={b.id}
-              className="flex flex-col justify-between rounded-2xl border border-zinc-200/80 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors shadow-xs"
-            >
-              <div>
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
-                    {b.name}
-                  </h3>
-                  <span className="text-[10px] font-medium rounded-full bg-zinc-100 dark:bg-zinc-800 px-2.5 py-0.5 text-zinc-600 dark:text-zinc-300 shrink-0">
-                    {b.category}
-                  </span>
+        {/* Dynamic View: Grid View vs Interactive Map Split View */}
+        {viewMode === "grid" ? (
+          /* Classic Grid View */
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredBusinesses.map((b) => (
+              <div
+                key={b.id}
+                className="flex flex-col justify-between rounded-2xl border border-zinc-200/80 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors shadow-xs"
+              >
+                <div>
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
+                      {b.name}
+                    </h3>
+                    <span className="text-[10px] font-medium rounded-full bg-zinc-100 dark:bg-zinc-800 px-2.5 py-0.5 text-zinc-600 dark:text-zinc-300 shrink-0">
+                      {b.category}
+                    </span>
+                  </div>
+
+                  <div className="mt-2 flex items-center gap-2 text-xs text-zinc-500">
+                    <div className="flex items-center gap-1">
+                      <MapPin className="h-3.5 w-3.5 text-zinc-400" />
+                      <span>{b.suburb}, QLD</span>
+                    </div>
+                    {b.isApproved && (
+                      <span className="inline-flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-medium">
+                        <ShieldCheck className="h-3.5 w-3.5" />
+                        <span>Verified</span>
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="mt-3.5 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    {b.description}
+                  </p>
                 </div>
 
-                <div className="mt-2 flex items-center gap-2 text-xs text-zinc-500">
-                  <div className="flex items-center gap-1">
-                    <MapPin className="h-3.5 w-3.5 text-zinc-400" />
-                    <span>{b.suburb}, QLD</span>
-                  </div>
-                  {b.isApproved && (
-                    <span className="inline-flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-medium">
-                      <ShieldCheck className="h-3.5 w-3.5" />
-                      <span>Verified</span>
-                    </span>
+                <div className="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs">
+                  <a
+                    href={`tel:${b.phone.replace(/\s+/g, "")}`}
+                    className="font-mono font-medium text-zinc-800 dark:text-zinc-200 hover:text-[#E30A17] transition-colors flex items-center gap-1.5"
+                  >
+                    <Phone className="h-3.5 w-3.5 text-zinc-400" />
+                    <span>{b.phone}</span>
+                  </a>
+
+                  {b.website ? (
+                    <a
+                      href={b.website.startsWith("http") ? b.website : `https://${b.website}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-medium text-[#E30A17] hover:underline"
+                    >
+                      <Globe className="h-3.5 w-3.5" />
+                      <span>Website</span>
+                    </a>
+                  ) : (
+                    <span className="text-zinc-400 text-[11px]">Direct Phone Only</span>
                   )}
                 </div>
-
-                <p className="mt-3.5 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                  {b.description}
-                </p>
               </div>
-
-              <div className="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs">
-                <a
-                  href={`tel:${b.phone.replace(/\s+/g, "")}`}
-                  className="font-mono font-medium text-zinc-800 dark:text-zinc-200 hover:text-[#E30A17] transition-colors flex items-center gap-1.5"
-                >
-                  <Phone className="h-3.5 w-3.5 text-zinc-400" />
-                  <span>{b.phone}</span>
-                </a>
-
-                {b.website ? (
-                  <a
-                    href={b.website.startsWith("http") ? b.website : `https://${b.website}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-medium text-[#E30A17] hover:underline"
+            ))}
+          </div>
+        ) : (
+          /* Interactive Map Split View */
+          <div className="mt-6 flex flex-col-reverse lg:grid lg:grid-cols-12 gap-8 items-start">
+            {/* Left Column: Interactive Cards List */}
+            <div className="w-full lg:col-span-5 flex flex-col gap-4 max-h-[720px] overflow-y-auto pr-1">
+              <div className="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1">
+                Click or hover a business to locate on map:
+              </div>
+              {filteredBusinesses.map((b) => {
+                const isSelected = selectedBusinessId === b.id;
+                return (
+                  <div
+                    key={b.id}
+                    onMouseEnter={() => setSelectedBusinessId(b.id)}
+                    onClick={() => setSelectedBusinessId(b.id)}
+                    className={`cursor-pointer rounded-2xl border p-5 transition-all shadow-xs ${
+                      isSelected
+                        ? "border-[#E30A17] bg-red-50/30 ring-2 ring-red-400/40 dark:border-red-500/80 dark:bg-red-950/20"
+                        : "border-zinc-200 bg-white hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900"
+                    }`}
                   >
-                    <Globe className="h-3.5 w-3.5" />
-                    <span>Website</span>
-                  </a>
-                ) : (
-                  <span className="text-zinc-400 text-[11px]">Direct Phone Only</span>
-                )}
-              </div>
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <span className="text-[10px] font-semibold tracking-wider uppercase text-[#E30A17]">
+                          {b.category}
+                        </span>
+                        <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
+                          {b.name}
+                        </h3>
+                      </div>
+                      <span className="inline-flex items-center gap-1 text-[11px] font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-full shrink-0">
+                        <MapPin className="h-3 w-3 text-[#E30A17]" />
+                        <span>{b.suburb}</span>
+                      </span>
+                    </div>
+
+                    <p className="mt-2 text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2 leading-relaxed">
+                      {b.description}
+                    </p>
+
+                    <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-xs">
+                      <a
+                        href={`tel:${b.phone.replace(/\s+/g, "")}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="font-mono text-zinc-700 dark:text-zinc-300 hover:text-[#E30A17] font-medium flex items-center gap-1"
+                      >
+                        <Phone className="h-3 w-3 text-zinc-400" />
+                        <span>{b.phone}</span>
+                      </a>
+
+                      <a
+                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                          b.name + " " + b.suburb + " QLD Australia"
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 font-semibold text-[#E30A17] hover:underline"
+                      >
+                        <Navigation className="h-3 w-3" />
+                        <span>Get Directions</span>
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          ))}
-        </div>
+
+            {/* Right Column: Sticky Interactive Leaflet Map */}
+            <div className="w-full lg:col-span-7 sticky top-20">
+              <DirectoryMap
+                businesses={filteredBusinesses}
+                selectedBusinessId={selectedBusinessId}
+                onSelectBusiness={setSelectedBusinessId}
+                className="h-[420px] sm:h-[550px] lg:h-[720px] w-full"
+              />
+            </div>
+          </div>
+        )}
 
         {filteredBusinesses.length === 0 && (
           <div className="mt-12 text-center py-16 rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-800">

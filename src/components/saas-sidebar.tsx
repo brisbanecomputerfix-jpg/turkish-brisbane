@@ -26,6 +26,7 @@ import {
   Laptop,
   GraduationCap,
   ExternalLink,
+  Map as MapIcon,
 } from "lucide-react";
 
 export function SaasSidebar() {
@@ -61,6 +62,7 @@ export function SaasSidebar() {
   const navLinks = [
     { href: "/", label: "Home", icon: Home, exact: true },
     { href: "/directory", label: "Business Directory", icon: Building2, badge: "Verified" },
+    { href: "/directory/map", label: "Interactive Map", icon: MapIcon, badge: "Map" },
     { href: "/noticeboard", label: "Noticeboard", icon: BellRing, badge: "Active" },
     { href: "/guide", label: "Living in QLD Guide", icon: BookOpen },
     { href: "/blog", label: "Insights & Playbooks", icon: BookOpen, badge: "New" },

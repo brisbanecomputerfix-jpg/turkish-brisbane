@@ -234,3 +234,4 @@ export function IsometricBridge({ size = 64, className, ...props }: IsometricIco
     </svg>
   );
 }
+

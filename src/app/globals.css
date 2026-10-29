@@ -69,3 +69,26 @@ html.a11y-dyslexic {
   line-height: 1.8 !important;
 }
 
+/* Leaflet Map Custom Modern Styling */
+.leaflet-popup-content-wrapper {
+  padding: 0 !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid #e4e4e7 !important;
+  overflow: hidden !important;
+}
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: 1.5 !important;
+}
+.leaflet-popup-tip {
+  background: #ffffff !important;
+}
+.custom-leaflet-marker {
+  background: transparent !important;
+  border: none !important;
+}
+.leaflet-container {
+  font-family: inherit !important;
+}
+

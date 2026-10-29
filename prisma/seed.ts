@@ -65,6 +65,42 @@ async function main() {
       suburb: "Toowong",
       isApproved: true,
     },
+    {
+      name: "Antalya Travertine & Natural Stone",
+      category: "Trades",
+      description: "Direct importer and QBCC licensed stone specialists supplying Turkish travertine pavers, Denizli marble, and custom tile installations across SEQ.",
+      phone: "+61 7 3100 8822",
+      website: "https://antalyastone.com.au",
+      suburb: "Fortitude Valley",
+      isApproved: true,
+    },
+    {
+      name: "Aegean Family Dental Care",
+      category: "Medical",
+      description: "Bilingual general and cosmetic dental clinic. Child dental benefits, dental implants, teeth whitening, and emergency toothache relief in Mount Gravatt.",
+      phone: "+61 7 3422 9900",
+      website: "https://aegeandental.com.au",
+      suburb: "Mount Gravatt",
+      isApproved: true,
+    },
+    {
+      name: "Surfers Paradise Turkish Kebabs & Bakery",
+      category: "Food & Groceries",
+      description: "Authentic wood-smoked lamb and chicken döner kebabs, fresh spinach & cheese borek, and pistachio baklava freshly baked daily on the Gold Coast.",
+      phone: "+61 7 5538 1234",
+      website: "https://surfersturkish.com.au",
+      suburb: "Gold Coast",
+      isApproved: true,
+    },
+    {
+      name: "Bosphorus Accounting & Advisory",
+      category: "Legal",
+      description: "Registered Tax Agents and CPAs advising Turkish-Australian enterprises on company tax returns, ASIC compliance, BAS lodgement, and startup structuring.",
+      phone: "+61 7 3012 6600",
+      website: "https://bosphorusadvisory.com.au",
+      suburb: "Brisbane CBD",
+      isApproved: true,
+    },
   ];
 
   for (const b of businesses) {

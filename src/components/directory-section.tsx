@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import {
   Search,
   MapPin,
@@ -11,6 +12,7 @@ import {
   Check,
   CheckCircle2,
   ExternalLink,
+  Map as MapIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -85,15 +87,24 @@ export function DirectorySection({
             </p>
           </div>
 
-          <Button
-            onClick={onOpenSubmitBusiness}
-            variant="outline"
-            size="sm"
-            className="gap-1.5 self-start md:self-auto"
-          >
-            <Plus className="h-4 w-4" />
-            <span>List Your Business</span>
-          </Button>
+          <div className="flex items-center gap-2 self-start md:self-auto">
+            <Link
+              href="/directory/map"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-white px-3 py-2 text-xs font-semibold text-zinc-700 hover:border-[#E30A17] hover:text-[#E30A17] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 shadow-2xs transition-colors"
+            >
+              <MapIcon className="h-3.5 w-3.5 text-[#E30A17]" />
+              <span>Interactive Map</span>
+            </Link>
+            <Button
+              onClick={onOpenSubmitBusiness}
+              variant="outline"
+              size="sm"
+              className="gap-1.5"
+            >
+              <Plus className="h-4 w-4" />
+              <span>List Your Business</span>
+            </Button>
+          </div>
         </div>
 
         {/* Search Bar & Filters */}

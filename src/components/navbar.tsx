@@ -28,6 +28,7 @@ import {
   FileText,
   Phone,
   LayoutGrid,
+  Map as MapIcon,
 } from "lucide-react";
 
 export function Navbar() {
@@ -223,12 +224,21 @@ export function Navbar() {
                 </div>
 
                 <div className="mt-3 pt-3 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs">
-                  <Link
-                    href="/directory"
-                    className="font-semibold text-[#E30A17] hover:underline"
-                  >
-                    Browse Complete Directory →
-                  </Link>
+                  <div className="flex items-center gap-3">
+                    <Link
+                      href="/directory"
+                      className="font-semibold text-zinc-700 dark:text-zinc-300 hover:text-[#E30A17]"
+                    >
+                      Browse Directory →
+                    </Link>
+                    <Link
+                      href="/directory/map"
+                      className="inline-flex items-center gap-1 font-semibold text-[#E30A17] hover:underline"
+                    >
+                      <MapIcon className="h-3 w-3" />
+                      <span>Interactive Map →</span>
+                    </Link>
+                  </div>
                   <button
                     type="button"
                     onClick={() => {
