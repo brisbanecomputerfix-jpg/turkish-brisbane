@@ -200,15 +200,15 @@ export function SeniorsClient({ initialPicnics }: SeniorsClientProps) {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             <div className="max-w-3xl space-y-3.5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50/90 px-3 py-1 text-xs font-semibold text-[#E30A17] dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300">
-                <Heart className="h-3.5 w-3.5 text-[#E30A17]" />
-                <span>
+              <div className="inline-flex max-w-full items-center gap-1.5 sm:gap-2 rounded-full border border-red-200 bg-red-50/90 px-3 py-1 text-[11px] sm:text-xs font-semibold text-[#E30A17] dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300">
+                <Heart className="h-3.5 w-3.5 text-[#E30A17] shrink-0" />
+                <span className="truncate sm:whitespace-normal">
                   {isTr
-                    ? "Queensland Türk Büyüklerimiz & Emekliler Buluşma Dayanışması"
-                    : "Queensland Turkish Seniors, Elders & Retirees Circle"}
+                    ? "Queensland Türk Büyüklerimiz & Emekliler Buluşması"
+                    : "Queensland Turkish Seniors & Elders Circle"}
                 </span>
               </div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-4xl lg:text-5xl">
+              <h1 className="text-2xl xs:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-4xl lg:text-5xl break-words">
                 {isTr ? (
                   <>
                     Park Piknikleri,{" "}

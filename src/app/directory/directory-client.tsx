@@ -171,13 +171,13 @@ export function DirectoryClient({ initialBusinesses }: { initialBusinesses: Busi
     <div className="py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-10 border-b border-zinc-200 dark:border-zinc-800">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 sm:pb-10 border-b border-zinc-200 dark:border-zinc-800">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-semibold text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
-              <ShieldCheck className="h-4 w-4 text-[#E30A17]" />
-              <span>Australian Business Register (ABR) Verified</span>
+            <div className="inline-flex max-w-full items-center gap-1.5 sm:gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-[11px] sm:text-xs font-semibold text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+              <ShieldCheck className="h-4 w-4 text-[#E30A17] shrink-0" />
+              <span className="truncate sm:whitespace-normal">Australian Business Register (ABR) Verified</span>
             </div>
-            <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
+            <h1 className="mt-4 text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 break-words">
               Queensland Turkish Directory
             </h1>
             <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">

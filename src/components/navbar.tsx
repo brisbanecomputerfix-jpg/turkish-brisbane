@@ -76,15 +76,15 @@ export function Navbar() {
     <header className="sticky top-0 z-40 w-full border-b border-zinc-200/80 bg-white/95 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/95">
       <div
         ref={navRef}
-        className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
+        className="mx-auto flex h-16 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8"
       >
         {/* Left: SaaS Sidebar Toggle & Brand */}
-        <div className="flex items-center gap-3 sm:gap-4">
-          {/* SaaS Sidebar Trigger */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
+          {/* SaaS Sidebar Trigger (Desktop / Tablet) */}
           <button
             type="button"
             onClick={toggleSidebar}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100 transition-colors"
+            className="hidden md:flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100 transition-colors shrink-0"
             title={isTr ? "Hızlı Gezinme Menüsü" : "Open Quick Navigation Sidebar"}
             aria-label="Toggle navigation sidebar"
           >
@@ -92,17 +92,17 @@ export function Navbar() {
           </button>
 
           {/* Brand Logo & Title */}
-          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group shrink-0">
             <TurkishLogo
-              size={36}
-              className="transition-transform group-hover:scale-105"
+              size={32}
+              className="transition-transform group-hover:scale-105 shrink-0"
             />
             <div className="flex flex-col">
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+              <div className="flex items-center gap-1 sm:gap-1.5">
+                <span className="text-sm sm:text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-100 whitespace-nowrap">
                   QLD Turks
                 </span>
-                <span className="inline-flex items-center rounded-full bg-red-50 dark:bg-red-950/50 px-2 py-0.5 text-[10px] font-semibold text-[#E30A17] ring-1 ring-inset ring-red-600/10 dark:ring-red-500/20">
+                <span className="hidden xs:inline-flex items-center rounded-full bg-red-50 dark:bg-red-950/50 px-1.5 py-0.2 text-[9px] font-semibold text-[#E30A17] ring-1 ring-inset ring-red-600/10 dark:ring-red-500/20">
                   Türkiye
                 </span>
               </div>
@@ -538,12 +538,12 @@ export function Navbar() {
         </nav>
 
         {/* Right Actions: Accessibility, List Business & WhatsApp */}
-        <div className="flex items-center gap-2 sm:gap-2.5">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* Accessibility Toggle Button */}
           <button
             type="button"
             onClick={() => setA11yOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-colors"
+            className="flex h-8.5 w-8.5 sm:h-9 sm:w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-colors"
             title="Accessibility settings / Erişilebilirlik"
             aria-label="Open accessibility settings"
           >
@@ -554,7 +554,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={toggleLanguage}
-            className="flex h-9 items-center gap-1.5 px-2.5 rounded-lg border border-zinc-200 bg-white text-xs font-bold text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 transition-colors shadow-2xs"
+            className="flex h-8.5 items-center gap-1 px-2 rounded-lg border border-zinc-200 bg-white text-[11px] sm:text-xs font-bold text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 transition-colors shadow-2xs"
             title={language === "tr" ? "Switch to English" : "Türkçe'ye geç"}
             aria-label="Toggle language between Turkish and English"
           >
@@ -567,7 +567,7 @@ export function Navbar() {
             </span>
           </button>
 
-          {/* List Business Button */}
+          {/* List Business Button (Desktop) */}
           <Button
             onClick={() => setSubmitBusinessOpen(true)}
             variant="outline"
@@ -583,7 +583,7 @@ export function Navbar() {
             onClick={() => setWhatsAppOpen(true)}
             variant="turkish"
             size="sm"
-            className="gap-1.5 text-xs font-semibold shadow-xs"
+            className="h-8.5 sm:h-9 px-2 sm:px-3 gap-1 sm:gap-1.5 text-xs font-semibold shadow-xs"
           >
             <MessageCircle className="h-3.5 w-3.5" />
             <span className="hidden xs:inline">WhatsApp</span>
@@ -594,7 +594,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex lg:hidden h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 text-zinc-600 hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-300"
+            className="flex lg:hidden h-8.5 w-8.5 sm:h-9 sm:w-9 items-center justify-center rounded-lg border border-zinc-200 text-zinc-600 hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-300"
             aria-label="Toggle mobile menu"
           >
             {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -604,7 +604,23 @@ export function Navbar() {
 
       {/* Mobile Accordion Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-zinc-200 bg-white px-4 py-4 dark:border-zinc-800 dark:bg-zinc-950 space-y-3 animate-in slide-in-from-top-2 duration-150">
+        <div className="lg:hidden border-t border-zinc-200 bg-white px-3 sm:px-4 py-4 dark:border-zinc-800 dark:bg-zinc-950 space-y-3 animate-in slide-in-from-top-2 duration-150 max-h-[calc(100dvh-4rem)] overflow-y-auto">
+          {/* Quick Drawer Link */}
+          <button
+            type="button"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              toggleSidebar();
+            }}
+            className="w-full flex items-center justify-between p-2.5 rounded-lg border border-red-200 bg-red-50/70 text-[#E30A17] dark:border-red-900/40 dark:bg-red-950/30 dark:text-red-300 text-xs font-bold"
+          >
+            <div className="flex items-center gap-2">
+              <LayoutGrid className="h-4 w-4" />
+              <span>{isTr ? "Hızlı Menü & Yan Panel Çekmecesini Aç" : "Open Quick Sidebar Drawer"}</span>
+            </div>
+            <span>→</span>
+          </button>
+
           <div className="grid grid-cols-2 gap-2 text-xs font-medium">
             <Link
               href="/directory"

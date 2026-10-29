@@ -16,6 +16,8 @@ export const viewport: Viewport = {
   themeColor: "#b91c1c", // Crimson red matching Turkish branding
   width: "device-width",
   initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
 };
 
 export const metadata: Metadata = {

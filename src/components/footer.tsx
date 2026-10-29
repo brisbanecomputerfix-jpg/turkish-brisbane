@@ -159,11 +159,11 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-6 border-t border-zinc-100 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-400">
+        <div className="mt-12 pt-6 border-t border-zinc-100 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-400 text-center sm:text-left">
           <div>
             © {new Date().getFullYear()} qldturks.com. Built with care for the Queensland Turkish Community.
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-4 gap-y-1.5">
             <Link href="/privacy" className="hover:underline">
               Privacy
             </Link>
@@ -173,6 +173,7 @@ export function Footer() {
             <Link href="/contact" className="hover:underline">
               Contact
             </Link>
+            <span className="hidden xs:inline">•</span>
             <span>Brisbane • Gold Coast • Sunshine Coast</span>
           </div>
         </div>

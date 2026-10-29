@@ -16,12 +16,12 @@ export function Hero({ onOpenWhatsApp, onOpenSubmitBusiness }: HeroProps) {
   const isTr = language === "tr";
 
   return (
-    <section className="relative pt-16 pb-14 sm:pt-24 sm:pb-20 border-b border-zinc-200/80 bg-white dark:bg-zinc-950 dark:border-zinc-800">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+    <section className="relative pt-12 pb-12 sm:pt-24 sm:pb-20 border-b border-zinc-200/80 bg-white dark:bg-zinc-950 dark:border-zinc-800 overflow-hidden">
+      <div className="mx-auto max-w-4xl px-3 sm:px-6 lg:px-8 text-center">
         {/* Subtle pill tag with official Ay-Yıldız emblem */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3.5 py-1 text-xs font-medium text-zinc-700 shadow-2xs dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
-          <TurkishLogo size={16} className="rounded-[4px] shadow-2xs" />
-          <span>
+        <div className="inline-flex max-w-full items-center gap-1.5 sm:gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-[11px] sm:text-xs font-medium text-zinc-700 shadow-2xs dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+          <TurkishLogo size={14} className="rounded-[3px] shadow-2xs shrink-0" />
+          <span className="truncate sm:whitespace-normal">
             {isTr
               ? "Queensland Türk Topluluğu & Rehber Portalı"
               : "Queensland Turkish Directory & Community Portal"}
@@ -29,7 +29,7 @@ export function Hero({ onOpenWhatsApp, onOpenSubmitBusiness }: HeroProps) {
         </div>
 
         {/* Clear, confident headline */}
-        <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-zinc-900 sm:text-5xl lg:text-6xl dark:text-white leading-[1.12]">
+        <h1 className="mt-5 text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-[1.15] break-words">
           {isTr
             ? "Queensland'deki güvenilir Türk işletme ve hizmetlerini keşfedin."
             : "Find trusted Turkish businesses & services in Queensland."}

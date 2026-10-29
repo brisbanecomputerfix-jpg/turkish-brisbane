@@ -103,10 +103,10 @@ export function DirectorySection({
             </p>
           </div>
 
-          <div className="flex items-center gap-2 self-start md:self-auto">
+          <div className="flex flex-wrap items-center gap-2 self-start md:self-auto">
             <Link
               href="/directory/map"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-white px-3 py-2 text-xs font-semibold text-zinc-700 hover:border-[#E30A17] hover:text-[#E30A17] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 shadow-2xs transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-white px-3 py-2 text-xs font-semibold text-zinc-700 hover:border-[#E30A17] hover:text-[#E30A17] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 shadow-2xs transition-colors shrink-0"
             >
               <MapIcon className="h-3.5 w-3.5 text-[#E30A17]" />
               <span>{isTr ? "İnteraktif Harita" : "Interactive Map"}</span>
@@ -115,7 +115,7 @@ export function DirectorySection({
               onClick={onOpenSubmitBusiness}
               variant="outline"
               size="sm"
-              className="gap-1.5"
+              className="gap-1.5 shrink-0"
             >
               <Plus className="h-4 w-4" />
               <span>{isTr ? "İşletmenizi Ekleyin" : "List Your Business"}</span>

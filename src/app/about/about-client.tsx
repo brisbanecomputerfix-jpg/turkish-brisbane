@@ -28,26 +28,26 @@ export function AboutClient() {
   const isTr = language === "tr";
 
   return (
-    <div className="py-12 sm:py-20">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <div className="py-10 sm:py-20 overflow-hidden">
+      <div className="mx-auto max-w-5xl px-3 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3.5 py-1 text-xs font-semibold text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
-            <TurkishLogo size={16} className="rounded-[4px]" />
-            <span>
+          <div className="inline-flex max-w-full items-center gap-1.5 sm:gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-[11px] sm:text-xs font-semibold text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+            <TurkishLogo size={14} className="rounded-[3px] shrink-0" />
+            <span className="truncate sm:whitespace-normal">
               {isTr
                 ? "Bağımsız & Gönüllü Topluluk Portalı"
                 : "Independent & Volunteer-Led"}
             </span>
           </div>
 
-          <h1 className="mt-5 text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.15]">
+          <h1 className="mt-4 text-2xl xs:text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.18] break-words">
             {isTr
               ? "Queensland Türk topluluğunu birbirine bağlıyor ve güçlendiriyoruz."
               : "Connecting and empowering the Turkish community across Queensland."}
           </h1>
 
-          <p className="mt-4 text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
             {isTr
               ? "QLD Turks; Brisbane ve Queensland genelindeki Türk profesyoneller, üniversite öğrencileri ve aileler tarafından, dolandırıcılık veya yetkisiz aracılardan uzak, resmi denetimli Türkçe hizmetlere güvenle ulaşmak için kurulmuştur."
               : "QLD Turks was founded by local professionals, students, and families in Greater Brisbane to solve a common challenge: finding reliable, verified, Turkish-speaking services without fear of scams or unaccredited providers."}
@@ -55,26 +55,26 @@ export function AboutClient() {
         </div>
 
         {/* Primary Hero Image: Brisbane Story Bridge */}
-        <div className="mt-12 relative overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-900 shadow-xl group">
+        <div className="mt-8 sm:mt-12 relative overflow-hidden rounded-2xl sm:rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-900 shadow-xl group">
           <img
             src="/images/story-bridge-brisbane.jpg"
             alt="Brisbane Story Bridge spanning the river with city skyline, Queensland Australia"
-            className="h-80 sm:h-[460px] w-full object-cover transition-transform duration-700 group-hover:scale-102"
+            className="h-72 sm:h-[460px] w-full object-cover transition-transform duration-700 group-hover:scale-102"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
           
           {/* Badge & Caption */}
-          <div className="absolute bottom-6 left-6 right-6 text-white max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-red-600/90 backdrop-blur-xs px-3 py-1 text-xs font-bold text-white shadow-sm mb-3">
-              <MapPin className="h-3.5 w-3.5 text-white" />
+          <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white max-w-2xl">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-red-600/90 backdrop-blur-xs px-2.5 py-0.5 text-[10px] sm:text-xs font-bold text-white shadow-sm mb-2 sm:mb-3">
+              <MapPin className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-white" />
               <span>Brisbane, Queensland · Story Bridge</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+            <h2 className="text-xl sm:text-3xl font-extrabold text-white leading-tight">
               {isTr
                 ? "Nehrin İki Yakasını Birleştiren Köprü Gibi"
                 : "Building Bridges Across Greater Brisbane & Queensland"}
             </h2>
-            <p className="mt-2 text-xs sm:text-sm text-zinc-200 leading-relaxed max-w-xl">
+            <p className="mt-1 sm:mt-2 text-[11px] sm:text-sm text-zinc-200 leading-relaxed max-w-xl line-clamp-3 sm:line-clamp-none">
               {isTr
                 ? "Tıpkı Brisbane'in simgesi olan tarihi Story Bridge'in nehrin iki yakasını birbirine bağlaması gibi; QLD Turks de Brisbane, Gold Coast ve Sunshine Coast'taki Türkleri, öğrencileri ve ustaları güçlü bir dayanışma bağıyla birleştiriyor."
                 : "Just as Brisbane's iconic Story Bridge connects Kangaroo Point, Fortitude Valley, and the CBD across the river, QLD Turks bridges Turkish-Australians, university students, professionals, and elders across South East Queensland."}
@@ -290,3 +290,4 @@ export function AboutClient() {
     </div>
   );
 }
+

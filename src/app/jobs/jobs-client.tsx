@@ -246,11 +246,13 @@ export function JobsClient({ initialJobs, initialCandidates }: JobsClientProps) 
         <div className="rounded-3xl border border-zinc-200/80 bg-linear-to-b from-zinc-50 to-white p-6 sm:p-10 dark:border-zinc-800 dark:from-zinc-900/60 dark:to-zinc-950 shadow-xs">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600 dark:bg-blue-950/30 dark:border-blue-500/30 mb-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse" />
-                {isTr ? "Queensland Türk İş Gücü & Kariyer Havuzu" : "Queensland Turkish Workforce & Job Pool"}
+              <div className="inline-flex max-w-full items-center gap-1.5 sm:gap-2 rounded-full border border-blue-500/20 bg-blue-50 px-3 py-1 text-[11px] sm:text-xs font-semibold text-blue-600 dark:bg-blue-950/30 dark:border-blue-500/30 mb-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse shrink-0" />
+                <span className="truncate sm:whitespace-normal">
+                  {isTr ? "Queensland Türk İş Gücü & Kariyer Havuzu" : "Queensland Turkish Workforce & Job Pool"}
+                </span>
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 break-words">
                 {isTr
                   ? "İki Dilli Yetenekleri Güvenilir Queensland İşverenleriyle Buluşturuyoruz"
                   : "Connecting Bilingual Talent With Trusted Queensland Employers"}

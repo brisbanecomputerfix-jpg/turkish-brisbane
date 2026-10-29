@@ -73,12 +73,12 @@ export default function GuidePage() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="border-b border-zinc-200 dark:border-zinc-800 pb-10">
-            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3.5 py-1 text-xs font-semibold text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
-              <Compass className="h-4 w-4 text-[#E30A17]" />
-              <span>Official Community Handbook • Updated for 2026</span>
+            <div className="inline-flex max-w-full items-center gap-1.5 sm:gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-[11px] sm:text-xs font-semibold text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+              <Compass className="h-3.5 w-3.5 text-[#E30A17] shrink-0" />
+              <span className="truncate sm:whitespace-normal">Official Community Handbook • Updated for 2026</span>
             </div>
 
-            <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.15]">
+            <h1 className="mt-4 text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.15] break-words">
               Living in Queensland: The Essential Turkish Expat & Student Guide
             </h1>
 

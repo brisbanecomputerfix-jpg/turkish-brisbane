@@ -59,13 +59,13 @@ export function BlogClient() {
     <div className="py-12 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto pb-12 border-b border-zinc-200 dark:border-zinc-800">
-          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3.5 py-1 text-xs font-semibold text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
-            <BookOpen className="h-3.5 w-3.5 text-[#E30A17]" />
-            <span>Community Insights, Playbooks & Industry Articles</span>
+        <div className="text-center max-w-3xl mx-auto pb-10 sm:pb-12 border-b border-zinc-200 dark:border-zinc-800">
+          <div className="inline-flex max-w-full items-center gap-1.5 sm:gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-[11px] sm:text-xs font-semibold text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+            <BookOpen className="h-3.5 w-3.5 text-[#E30A17] shrink-0" />
+            <span className="truncate sm:whitespace-normal">Community Insights, Playbooks & Industry Articles</span>
           </div>
 
-          <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.15]">
+          <h1 className="mt-4 text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.15] break-words">
             Uniting Community, Unlocking Business & Building the Future
           </h1>
 

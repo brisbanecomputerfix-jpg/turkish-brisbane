@@ -180,12 +180,12 @@ export function NoticeboardSection({
                 </div>
 
                 {/* Footer / Contact */}
-                <div className="mt-5 pt-3.5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs">
-                  <div className="text-zinc-600 dark:text-zinc-400 truncate mr-3">
-                    <span className="text-[11px] text-zinc-400 uppercase font-medium mr-1.5">
+                <div className="mt-5 pt-3.5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-2 text-xs">
+                  <div className="text-zinc-600 dark:text-zinc-400 min-w-0 flex-1 truncate">
+                    <span className="text-[11px] text-zinc-400 uppercase font-medium mr-1.5 shrink-0">
                       Contact:
                     </span>
-                    <span className="font-mono text-xs font-medium text-zinc-800 dark:text-zinc-200 select-all">
+                    <span className="font-mono text-xs font-medium text-zinc-800 dark:text-zinc-200 select-all truncate">
                       {notice.contactInfo}
                     </span>
                   </div>
