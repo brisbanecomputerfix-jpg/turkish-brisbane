@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import {
   Briefcase,
   Users,
@@ -45,9 +46,18 @@ const CATEGORIES = [
 const EMPLOYMENT_TYPES = ["All", "Full-time", "Part-time", "Casual", "Apprenticeship"];
 
 export function JobsClient({ initialJobs, initialCandidates }: JobsClientProps) {
-  const [activeTab, setActiveTab] = React.useState<"jobs" | "candidates">("jobs");
+  const searchParams = useSearchParams();
+  const initialTab = searchParams.get("tab") === "candidates" ? "candidates" : "jobs";
+  const [activeTab, setActiveTab] = React.useState<"jobs" | "candidates">(initialTab);
   const [jobs, setJobs] = React.useState<JobPosting[]>(initialJobs);
   const [candidates, setCandidates] = React.useState<CandidateProfile[]>(initialCandidates);
+
+  React.useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab === "candidates" || tab === "jobs") {
+      setActiveTab(tab);
+    }
+  }, [searchParams]);
 
   // Filters
   const [searchQuery, setSearchQuery] = React.useState("");
