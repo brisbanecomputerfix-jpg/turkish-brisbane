@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { HomeClient } from "@/components/home-client";
 import { Metadata } from "next";
+import { DEFAULT_BUSINESSES } from "@/data/fallback-businesses";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -50,6 +51,10 @@ export default async function HomePage() {
     });
   } catch (error) {
     console.error("Database fetch error:", error);
+  }
+
+  if (businesses.length === 0) {
+    businesses = DEFAULT_BUSINESSES;
   }
 
   // Generate Structured Data (JSON-LD) for SEO

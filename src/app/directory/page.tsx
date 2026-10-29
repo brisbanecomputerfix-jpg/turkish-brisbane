@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { DirectoryClient } from "./directory-client";
+import { DEFAULT_BUSINESSES } from "@/data/fallback-businesses";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -40,6 +41,10 @@ export default async function DirectoryPage() {
     });
   } catch (error) {
     console.error("Failed to load directory businesses:", error);
+  }
+
+  if (businesses.length === 0) {
+    businesses = DEFAULT_BUSINESSES;
   }
 
   // Schema.org ItemList with LocalBusiness items for E-E-A-T Google compliance
