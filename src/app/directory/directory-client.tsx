@@ -394,3 +394,4 @@ export function DirectoryClient({ initialBusinesses }: { initialBusinesses: Busi
     </div>
   );
 }
+

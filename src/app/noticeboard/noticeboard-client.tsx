@@ -260,3 +260,4 @@ export function NoticeboardClient({ initialNotices }: { initialNotices: NoticeIt
     </div>
   );
 }
+

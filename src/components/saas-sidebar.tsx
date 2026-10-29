@@ -62,7 +62,8 @@ export function SaasSidebar() {
     { href: "/", label: "Home", icon: Home, exact: true },
     { href: "/directory", label: "Business Directory", icon: Building2, badge: "Verified" },
     { href: "/noticeboard", label: "Noticeboard", icon: BellRing, badge: "Active" },
-    { href: "/guide", label: "Living in QLD Guide", icon: BookOpen, badge: "New" },
+    { href: "/guide", label: "Living in QLD Guide", icon: BookOpen },
+    { href: "/blog", label: "Insights & Playbooks", icon: BookOpen, badge: "New" },
     { href: "/about", label: "About & E-E-A-T Standards", icon: Info },
     { href: "/contact", label: "Contact & Support", icon: Mail },
   ];
@@ -257,3 +258,4 @@ export function SaasSidebar() {
     </div>
   );
 }
+

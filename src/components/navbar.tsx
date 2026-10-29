@@ -335,7 +335,19 @@ export function Navbar() {
             Living in QLD Guide
           </Link>
 
-          {/* 4. About & E-E-A-T */}
+          {/* 4. Insights & Articles */}
+          <Link
+            href="/blog"
+            className={`px-3 py-2 rounded-lg text-xs font-semibold transition-colors ${
+              pathname.startsWith("/blog")
+                ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100"
+                : "hover:bg-zinc-50 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-zinc-100"
+            }`}
+          >
+            Insights & Playbooks
+          </Link>
+
+          {/* 5. About & E-E-A-T */}
           <div className="relative">
             <button
               type="button"
@@ -369,6 +381,21 @@ export function Navbar() {
                       </div>
                       <div className="text-[11px] text-zinc-400">
                         Mission, governance & ethics
+                      </div>
+                    </div>
+                  </Link>
+
+                  <Link
+                    href="/blog/why-qld-turks-bridging-the-missing-gap"
+                    className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
+                  >
+                    <BookOpen className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
+                    <div>
+                      <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
+                        The Missing Gap
+                      </div>
+                      <div className="text-[11px] text-zinc-400">
+                        Why QLD Turks was founded
                       </div>
                     </div>
                   </Link>
@@ -482,11 +509,18 @@ export function Navbar() {
               <span>QLD Guide</span>
             </Link>
             <Link
-              href="/about"
+              href="/blog"
               className="flex items-center gap-2 p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100"
             >
+              <BookOpen className="h-4 w-4 text-emerald-600" />
+              <span>Insights & Blog</span>
+            </Link>
+            <Link
+              href="/about"
+              className="flex items-center gap-2 p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 col-span-2"
+            >
               <ShieldCheck className="h-4 w-4 text-[#E30A17]" />
-              <span>About & Trust</span>
+              <span>About & Trust Standards</span>
             </Link>
           </div>
 
