@@ -913,3 +913,4 @@ export function SeniorsClient({ initialPicnics }: SeniorsClientProps) {
     </div>
   );
 }
+

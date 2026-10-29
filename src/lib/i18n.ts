@@ -110,3 +110,4 @@ export function getTranslation(key: keyof typeof translations, lang: Language): 
   if (!item) return key;
   return item[lang] || item["en"] || key;
 }
+

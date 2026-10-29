@@ -142,3 +142,4 @@ export const SENIOR_PARK_PICNICS: SeniorPicnicEvent[] = [
     contactCoordinator: "Kemal Bey (+61 400 777 555)",
   },
 ];
+
