@@ -28,6 +28,7 @@ import {
   generateIcsContent,
 } from "@/data/community-events";
 import { Button } from "@/components/ui/button";
+import { useApp } from "@/context/app-context";
 
 interface EventsClientProps {
   initialEvents: CommunityEvent[];
@@ -42,6 +43,9 @@ const CATEGORIES = [
 ] as const;
 
 export function EventsClient({ initialEvents }: EventsClientProps) {
+  const { language } = useApp();
+  const isTr = language === "tr";
+
   const [events, setEvents] = React.useState<CommunityEvent[]>(initialEvents);
   const [selectedCategory, setSelectedCategory] = React.useState<string>("All");
   const [searchQuery, setSearchQuery] = React.useState<string>("");
@@ -262,16 +266,22 @@ export function EventsClient({ initialEvents }: EventsClientProps) {
             <div className="max-w-3xl space-y-3">
               <div className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50/80 px-3 py-1 text-xs font-semibold text-[#E30A17] dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300">
                 <CalendarIcon className="h-3.5 w-3.5 text-[#E30A17]" />
-                <span>Queensland Turkish Community Calendar 2026</span>
+                <span>
+                  {isTr
+                    ? "Queensland Türk Topluluğu Etkinlik Takvimi 2026"
+                    : "Queensland Turkish Community Calendar 2026"}
+                </span>
               </div>
               <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-4xl lg:text-5xl">
-                Events, Gatherings &{" "}
+                {isTr ? "Etkinlikler, Buluşmalar & " : "Events, Gatherings & "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E30A17] via-red-600 to-cyan-600 dark:to-cyan-400">
-                  Bilateral Forums
+                  {isTr ? "Kültürel Buluşmalar" : "Bilateral Forums"}
                 </span>
               </h1>
               <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                Connect with Queensland’s vibrant Turkish diaspora through monthly riverfront breakfasts, Republic Day galas, university mentorship BBQs, and licensed trade workshops across Greater Brisbane and the Gold Coast.
+                {isTr
+                  ? "Brisbane ve Gold Coast genelinde nehir kenarı Türk kahvaltıları, 29 Ekim Cumhuriyet Balosu, üniversite gençlik buluşmaları ve ticaret seminerleriyle topluluğumuzla bir araya gelin."
+                  : "Connect with Queensland’s vibrant Turkish diaspora through monthly riverfront breakfasts, Republic Day galas, university mentorship BBQs, and licensed trade workshops across Greater Brisbane and the Gold Coast."}
               </p>
             </div>
 
@@ -283,11 +293,11 @@ export function EventsClient({ initialEvents }: EventsClientProps) {
                 className="gap-2 text-xs font-semibold shadow-sm"
               >
                 <Plus className="h-4 w-4" />
-                <span>Submit Community Event</span>
+                <span>{isTr ? "Etkinlik Ekle" : "Submit Community Event"}</span>
               </Button>
               <Link href="/noticeboard">
                 <Button variant="outline" className="gap-2 text-xs font-medium">
-                  <span>View Noticeboard →</span>
+                  <span>{isTr ? "Duyuru Panosuna Git →" : "View Noticeboard →"}</span>
                 </Button>
               </Link>
             </div>

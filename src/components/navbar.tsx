@@ -31,6 +31,7 @@ import {
   Map as MapIcon,
   Briefcase,
   Calendar as CalendarIcon,
+  Heart,
 } from "lucide-react";
 
 export function Navbar() {
@@ -39,8 +40,12 @@ export function Navbar() {
     setWhatsAppOpen,
     setSubmitBusinessOpen,
     setA11yOpen,
+    language,
+    toggleLanguage,
+    t,
   } = useApp();
 
+  const isTr = language === "tr";
   const pathname = usePathname();
   const [activeDropdown, setActiveDropdown] = React.useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -80,7 +85,7 @@ export function Navbar() {
             type="button"
             onClick={toggleSidebar}
             className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100 transition-colors"
-            title="Open Quick Navigation Sidebar"
+            title={isTr ? "Hızlı Gezinme Menüsü" : "Open Quick Navigation Sidebar"}
             aria-label="Toggle navigation sidebar"
           >
             <LayoutGrid className="h-4 w-4" />
@@ -102,7 +107,7 @@ export function Navbar() {
                 </span>
               </div>
               <span className="hidden sm:inline-block text-[11px] text-zinc-500 dark:text-zinc-400 font-normal">
-                Queensland Community Directory
+                {isTr ? "Queensland Türk Topluluğu" : "Queensland Community Directory"}
               </span>
             </div>
           </Link>
@@ -122,7 +127,7 @@ export function Navbar() {
               }`}
               aria-expanded={activeDropdown === "directory"}
             >
-              <span>Directory</span>
+              <span>{isTr ? "Rehber" : "Directory"}</span>
               <ChevronDown
                 className={`h-3.5 w-3.5 transition-transform duration-200 ${
                   activeDropdown === "directory" ? "rotate-180" : ""
@@ -141,10 +146,10 @@ export function Navbar() {
                     <Stethoscope className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                        Medical & Health
+                        {isTr ? "Sağlık & Tıp" : "Medical & Health"}
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Turkish doctors & GPs
+                        {isTr ? "Türk doktorlar & klinikler" : "Turkish doctors & GPs"}
                       </div>
                     </div>
                   </Link>
@@ -156,10 +161,10 @@ export function Navbar() {
                     <Scale className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                        Legal & Migration
+                        {isTr ? "Hukuk & Göçmenlik" : "Legal & Migration"}
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Solicitors & visa agents
+                        {isTr ? "Avukatlar & vize danışmanları" : "Solicitors & visa agents"}
                       </div>
                     </div>
                   </Link>
@@ -171,10 +176,10 @@ export function Navbar() {
                     <UtensilsCrossed className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                        Food & Groceries
+                        {isTr ? "Market & Yeme-İçme" : "Food & Groceries"}
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Bakeries, pide & halal
+                        {isTr ? "Fırınlar, pide & helal kasaplar" : "Bakeries, pide & halal"}
                       </div>
                     </div>
                   </Link>
@@ -186,10 +191,10 @@ export function Navbar() {
                     <Laptop className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                        Tech & IT
+                        {isTr ? "Bilişim & IT" : "Tech & IT"}
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Web, POS & support
+                        {isTr ? "Yazılım, web & teknik destek" : "Web, POS & support"}
                       </div>
                     </div>
                   </Link>
@@ -201,10 +206,10 @@ export function Navbar() {
                     <Wrench className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                        Trades & Services
+                        {isTr ? "Ustalar & Hizmetler" : "Trades & Services"}
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Electricians, painters
+                        {isTr ? "Elektrikçi, boyacı & tamirat" : "Electricians, painters"}
                       </div>
                     </div>
                   </Link>
@@ -216,10 +221,10 @@ export function Navbar() {
                     <GraduationCap className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                        Education & Tutors
+                        {isTr ? "Eğitim & Dersler" : "Education & Tutors"}
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Turkish school & lessons
+                        {isTr ? "Türkçe okulu & özel dersler" : "Turkish school & lessons"}
                       </div>
                     </div>
                   </Link>
@@ -231,14 +236,14 @@ export function Navbar() {
                       href="/directory"
                       className="font-semibold text-zinc-700 dark:text-zinc-300 hover:text-[#E30A17]"
                     >
-                      Browse Directory →
+                      {isTr ? "Rehbere Göz At →" : "Browse Directory →"}
                     </Link>
                     <Link
                       href="/directory/map"
                       className="inline-flex items-center gap-1 font-semibold text-[#E30A17] hover:underline"
                     >
                       <MapIcon className="h-3 w-3" />
-                      <span>Interactive Map →</span>
+                      <span>{isTr ? "İnteraktif Harita →" : "Interactive Map →"}</span>
                     </Link>
                   </div>
                   <button
@@ -249,7 +254,7 @@ export function Navbar() {
                     }}
                     className="text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
                   >
-                    + Add Business
+                    {isTr ? "+ İşletme Ekle" : "+ Add Business"}
                   </button>
                 </div>
               </div>
@@ -268,7 +273,7 @@ export function Navbar() {
               }`}
               aria-expanded={activeDropdown === "community"}
             >
-              <span>Community</span>
+              <span>{isTr ? "Topluluk" : "Community"}</span>
               <ChevronDown
                 className={`h-3.5 w-3.5 transition-transform duration-200 ${
                   activeDropdown === "community" ? "rotate-180" : ""
@@ -290,13 +295,13 @@ export function Navbar() {
                     <MessageCircle className="h-4 w-4 text-emerald-600 mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
-                        <span>WhatsApp Network</span>
+                        <span>{isTr ? "WhatsApp Topluluğu" : "WhatsApp Network"}</span>
                         <span className="text-[9px] bg-emerald-50 text-emerald-700 px-1.5 py-0.2 rounded-full font-bold">
-                          Live
+                          {isTr ? "Aktif" : "Live"}
                         </span>
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Join 420+ members across Queensland
+                        {isTr ? "Queensland genelinde 420+ üyeye katıl" : "Join 420+ members across Queensland"}
                       </div>
                     </div>
                   </button>
@@ -308,10 +313,10 @@ export function Navbar() {
                     <BellRing className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                        Community Noticeboard
+                        {isTr ? "Duyuru Panosu" : "Community Noticeboard"}
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Room rentals, bulk imports & jobs
+                        {isTr ? "Oda kiralama, ortak ithalat & ilanlar" : "Room rentals, bulk imports & jobs"}
                       </div>
                     </div>
                   </Link>
@@ -323,13 +328,13 @@ export function Navbar() {
                     <Briefcase className="h-4 w-4 text-blue-600 mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
-                        <span>Careers & Job Pool</span>
+                        <span>{isTr ? "Kariyer & İş Havuzu" : "Careers & Job Pool"}</span>
                         <span className="text-[9px] bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 px-1.5 py-0.2 rounded-full font-bold">
-                          Hiring
+                          {isTr ? "İlanlar" : "Hiring"}
                         </span>
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Verified vacancies & talent registry
+                        {isTr ? "Onaylı iş ilanları & yetenek havuzu" : "Verified vacancies & talent registry"}
                       </div>
                     </div>
                   </Link>
@@ -341,13 +346,13 @@ export function Navbar() {
                     <CalendarIcon className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
-                        <span>Events & Calendar</span>
+                        <span>{isTr ? "Etkinlikler & Takvim" : "Events & Calendar"}</span>
                         <span className="text-[9px] bg-red-50 text-[#E30A17] dark:bg-red-950/60 px-1.5 py-0.2 rounded-full font-bold">
-                          Gatherings
+                          {isTr ? "Buluşmalar" : "Gatherings"}
                         </span>
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Monthly breakfasts, gala balls & forums
+                        {isTr ? "Kahvaltılar, Cumhuriyet Balosu & buluşmalar" : "Monthly breakfasts, gala balls & forums"}
                       </div>
                     </div>
                   </Link>
@@ -359,13 +364,31 @@ export function Navbar() {
                     <GraduationCap className="h-4 w-4 text-emerald-600 mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
-                        <span>Hire a Turkish Student</span>
+                        <span>{language === "tr" ? "Bir Öğrenciye Destek Ol" : "Hire a Turkish Student"}</span>
                         <span className="text-[9px] bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 px-1.5 py-0.2 rounded-full font-bold">
-                          Support
+                          {language === "tr" ? "Destek" : "Support"}
                         </span>
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Babysitting, cleaning, handyman & tutoring
+                        {language === "tr" ? "Çocuk bakımı, temizlik, tamirat & ders" : "Babysitting, cleaning, handyman & tutoring"}
+                      </div>
+                    </div>
+                  </Link>
+
+                  <Link
+                    href="/seniors"
+                    className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
+                  >
+                    <Heart className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
+                    <div>
+                      <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
+                        <span>{language === "tr" ? "Büyüklerimiz & Park Piknikleri" : "Elders & Park Picnics"}</span>
+                        <span className="text-[9px] bg-red-50 text-[#E30A17] dark:bg-red-950/60 px-1.5 py-0.2 rounded-full font-bold">
+                          {language === "tr" ? "Semaver" : "Picnics"}
+                        </span>
+                      </div>
+                      <div className="text-[11px] text-zinc-400">
+                        {language === "tr" ? "Gölgeli park buluşmaları, çay, tavla & genç şoförler" : "Shaded park picnics, samovar tea & youth carpool"}
                       </div>
                     </div>
                   </Link>
@@ -377,10 +400,10 @@ export function Navbar() {
                     <Users className="h-4 w-4 text-zinc-600 dark:text-zinc-400 mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                        Bulk Orders & Mutual Aid
+                        {isTr ? "Toplu Sipariş & Dayanışma" : "Bulk Orders & Mutual Aid"}
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Direct Turkish coffee & olive oil pallets
+                        {isTr ? "Doğrudan Türk kahvesi & zeytinyağı alımları" : "Direct Turkish coffee & olive oil pallets"}
                       </div>
                     </div>
                   </Link>
@@ -398,7 +421,7 @@ export function Navbar() {
                 : "hover:bg-zinc-50 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-zinc-100"
             }`}
           >
-            Living in QLD Guide
+            {isTr ? "QLD Yaşam Rehberi" : "Living in QLD Guide"}
           </Link>
 
           {/* 4. Careers & Job Pool */}
@@ -410,7 +433,7 @@ export function Navbar() {
                 : "hover:bg-zinc-50 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-zinc-100"
             }`}
           >
-            <span>Careers & Jobs</span>
+            <span>{isTr ? "Kariyer & İlanlar" : "Careers & Jobs"}</span>
             <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
           </Link>
 
@@ -423,10 +446,10 @@ export function Navbar() {
                 : "hover:bg-zinc-50 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-zinc-100"
             }`}
           >
-            Insights & Playbooks
+            {isTr ? "Makaleler" : "Insights & Playbooks"}
           </Link>
 
-          {/* 5. About & E-E-A-T */}
+          {/* 6. About & E-E-A-T */}
           <div className="relative">
             <button
               type="button"
@@ -438,7 +461,7 @@ export function Navbar() {
               }`}
               aria-expanded={activeDropdown === "about"}
             >
-              <span>About & Trust</span>
+              <span>{isTr ? "Hakkımızda & Güven" : "About & Trust"}</span>
               <ChevronDown
                 className={`h-3.5 w-3.5 transition-transform duration-200 ${
                   activeDropdown === "about" ? "rotate-180" : ""
@@ -456,10 +479,10 @@ export function Navbar() {
                     <ShieldCheck className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                        About QLD Turks
+                        {isTr ? "QLD Turks Hakkında" : "About QLD Turks"}
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Mission, governance & ethics
+                        {isTr ? "Misyonumuz, yönetim & ilkelerimiz" : "Mission, governance & ethics"}
                       </div>
                     </div>
                   </Link>
@@ -471,10 +494,10 @@ export function Navbar() {
                     <BookOpen className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                        The Missing Gap
+                        {isTr ? "Eksik Olan Halka" : "The Missing Gap"}
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Why QLD Turks was founded
+                        {isTr ? "Neden QLD Turks kuruldu?" : "Why QLD Turks was founded"}
                       </div>
                     </div>
                   </Link>
@@ -486,10 +509,10 @@ export function Navbar() {
                     <FileText className="h-4 w-4 text-zinc-500 mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                        Verification & Standards
+                        {isTr ? "Onay & Standartlar" : "Verification & Standards"}
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        How listings are vetted (E-E-A-T)
+                        {isTr ? "İşletmeler nasıl denetlenir (E-E-A-T)" : "How listings are vetted (E-E-A-T)"}
                       </div>
                     </div>
                   </Link>
@@ -501,10 +524,10 @@ export function Navbar() {
                     <Phone className="h-4 w-4 text-zinc-500 mt-0.5 shrink-0" />
                     <div>
                       <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                        Contact & Support
+                        {isTr ? "İletişim & Destek" : "Contact & Support"}
                       </div>
                       <div className="text-[11px] text-zinc-400">
-                        Enquiries & community feedback
+                        {isTr ? "Sorularınız ve geri bildirim" : "Enquiries & community feedback"}
                       </div>
                     </div>
                   </Link>
@@ -527,6 +550,23 @@ export function Navbar() {
             <Accessibility className="h-4 w-4 text-[#E30A17]" />
           </button>
 
+          {/* Language Switcher (TR | EN) */}
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="flex h-9 items-center gap-1.5 px-2.5 rounded-lg border border-zinc-200 bg-white text-xs font-bold text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 transition-colors shadow-2xs"
+            title={language === "tr" ? "Switch to English" : "Türkçe'ye geç"}
+            aria-label="Toggle language between Turkish and English"
+          >
+            <span className={language === "tr" ? "text-[#E30A17] font-black" : "text-zinc-400 font-normal"}>
+              TR
+            </span>
+            <span className="text-zinc-300 dark:text-zinc-700">|</span>
+            <span className={language === "en" ? "text-cyan-600 font-black" : "text-zinc-400 font-normal"}>
+              EN
+            </span>
+          </button>
+
           {/* List Business Button */}
           <Button
             onClick={() => setSubmitBusinessOpen(true)}
@@ -535,7 +575,7 @@ export function Navbar() {
             className="hidden sm:inline-flex gap-1.5 text-xs font-medium"
           >
             <Plus className="h-3.5 w-3.5 text-[#E30A17]" />
-            <span>List Business</span>
+            <span>{isTr ? "İşletme Ekle" : "List Business"}</span>
           </Button>
 
           {/* WhatsApp Button */}
@@ -547,7 +587,7 @@ export function Navbar() {
           >
             <MessageCircle className="h-3.5 w-3.5" />
             <span className="hidden xs:inline">WhatsApp</span>
-            <span className="xs:hidden">Join</span>
+            <span className="xs:hidden">{isTr ? "Katıl" : "Join"}</span>
           </Button>
 
           {/* Mobile Menu Hamburger */}
@@ -571,28 +611,28 @@ export function Navbar() {
               className="flex items-center gap-2 p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100"
             >
               <Building2 className="h-4 w-4 text-[#E30A17]" />
-              <span>Directory</span>
+              <span>{isTr ? "Rehber" : "Directory"}</span>
             </Link>
             <Link
               href="/noticeboard"
               className="flex items-center gap-2 p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100"
             >
               <BellRing className="h-4 w-4 text-[#E30A17]" />
-              <span>Noticeboard</span>
+              <span>{isTr ? "Duyuru Panosu" : "Noticeboard"}</span>
             </Link>
             <Link
               href="/guide"
               className="flex items-center gap-2 p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100"
             >
               <BookOpen className="h-4 w-4 text-[#E30A17]" />
-              <span>QLD Guide</span>
+              <span>{isTr ? "QLD Rehberi" : "QLD Guide"}</span>
             </Link>
             <Link
               href="/blog"
               className="flex items-center gap-2 p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100"
             >
               <BookOpen className="h-4 w-4 text-emerald-600" />
-              <span>Insights & Blog</span>
+              <span>{isTr ? "Makaleler" : "Insights & Blog"}</span>
             </Link>
             <Link
               href="/jobs"
@@ -600,9 +640,9 @@ export function Navbar() {
             >
               <Briefcase className="h-4 w-4 text-blue-600" />
               <div className="flex items-center justify-between w-full">
-                <span>Careers & Job Pool</span>
+                <span>{isTr ? "Kariyer & İş Havuzu" : "Careers & Job Pool"}</span>
                 <span className="text-[10px] bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded font-bold">
-                  Hiring
+                  {isTr ? "İlanlar" : "Hiring"}
                 </span>
               </div>
             </Link>
@@ -612,9 +652,9 @@ export function Navbar() {
             >
               <CalendarIcon className="h-4 w-4 text-[#E30A17]" />
               <div className="flex items-center justify-between w-full">
-                <span>Events & Gatherings</span>
+                <span>{isTr ? "Etkinlikler & Takvim" : "Events & Gatherings"}</span>
                 <span className="text-[10px] bg-red-100 dark:bg-red-950 text-[#E30A17] px-1.5 py-0.5 rounded font-bold">
-                  Calendar
+                  {isTr ? "Takvim" : "Calendar"}
                 </span>
               </div>
             </Link>
@@ -624,9 +664,21 @@ export function Navbar() {
             >
               <GraduationCap className="h-4 w-4 text-emerald-600" />
               <div className="flex items-center justify-between w-full">
-                <span>Hire a Turkish Student</span>
+                <span>{isTr ? "Bir Öğrenciye Destek Ol" : "Hire a Turkish Student"}</span>
                 <span className="text-[10px] bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 px-1.5 py-0.5 rounded font-bold">
-                  Support
+                  {isTr ? "Dayanışma" : "Support"}
+                </span>
+              </div>
+            </Link>
+            <Link
+              href="/seniors"
+              className="flex items-center gap-2 p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 col-span-2"
+            >
+              <Heart className="h-4 w-4 text-[#E30A17]" />
+              <div className="flex items-center justify-between w-full">
+                <span>{isTr ? "Büyüklerimiz & Park Piknikleri" : "Elders & Park Picnics"}</span>
+                <span className="text-[10px] bg-red-100 dark:bg-red-950 text-[#E30A17] px-1.5 py-0.5 rounded font-bold">
+                  {isTr ? "Semaver" : "Picnics"}
                 </span>
               </div>
             </Link>
@@ -635,7 +687,7 @@ export function Navbar() {
               className="flex items-center gap-2 p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 col-span-2"
             >
               <ShieldCheck className="h-4 w-4 text-[#E30A17]" />
-              <span>About & Trust Standards</span>
+              <span>{isTr ? "Hakkımızda & Güven İlkeleri" : "About & Trust Standards"}</span>
             </Link>
           </div>
 
@@ -650,7 +702,7 @@ export function Navbar() {
               className="w-1/2 text-xs gap-1.5"
             >
               <Plus className="h-3.5 w-3.5 text-[#E30A17]" />
-              <span>Add Listing</span>
+              <span>{isTr ? "İşletme Ekle" : "Add Listing"}</span>
             </Button>
             <Button
               onClick={() => {
@@ -662,7 +714,7 @@ export function Navbar() {
               className="w-1/2 text-xs gap-1.5"
             >
               <Accessibility className="h-3.5 w-3.5 text-[#E30A17]" />
-              <span>Accessibility</span>
+              <span>{isTr ? "Erişilebilirlik" : "Accessibility"}</span>
             </Button>
           </div>
         </div>

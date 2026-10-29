@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Plus, Calendar, Copy, Check, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useApp } from "@/context/app-context";
 
 export interface NoticeItem {
   id: string;
@@ -22,6 +23,9 @@ export function NoticeboardSection({
   initialNotices,
   onOpenSubmitNotice,
 }: NoticeboardSectionProps) {
+  const { language } = useApp();
+  const isTr = language === "tr";
+
   const [filterType, setFilterType] = React.useState("all");
   const [copiedId, setCopiedId] = React.useState<string | null>(null);
 
@@ -39,20 +43,33 @@ export function NoticeboardSection({
   const getNoticeBadge = (type: string) => {
     switch (type) {
       case "bulk_order":
-        return { label: "Bulk Order", style: "bg-amber-50 text-amber-800 border-amber-200/80" };
+        return {
+          label: isTr ? "Toplu Sipariş" : "Bulk Order",
+          style: "bg-amber-50 text-amber-800 border-amber-200/80",
+        };
       case "job":
-        return { label: "Job / Housing", style: "bg-emerald-50 text-emerald-800 border-emerald-200/80" };
+        return {
+          label: isTr ? "İş / Konaklama" : "Job / Housing",
+          style: "bg-emerald-50 text-emerald-800 border-emerald-200/80",
+        };
       default:
-        return { label: "Community", style: "bg-zinc-100 text-zinc-700 border-zinc-200" };
+        return {
+          label: isTr ? "Topluluk" : "Community",
+          style: "bg-zinc-100 text-zinc-700 border-zinc-200",
+        };
     }
   };
 
   const formatDate = (dateInput: string | Date) => {
     try {
       const d = new Date(dateInput);
-      return d.toLocaleDateString("en-AU", { month: "short", day: "numeric", year: "numeric" });
+      return d.toLocaleDateString(isTr ? "tr-TR" : "en-AU", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
     } catch {
-      return "Recent";
+      return isTr ? "Yeni" : "Recent";
     }
   };
 
@@ -66,10 +83,12 @@ export function NoticeboardSection({
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-zinc-200 dark:border-zinc-800">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
-              Community Noticeboard
+              {isTr ? "Topluluk Duyuru Panosu" : "Community Noticeboard"}
             </h2>
             <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-              Bulk imports (Turkish coffee, olive oil), room rentals, job leads, and local announcements.
+              {isTr
+                ? "Ortak ithalat (Türk kahvesi, zeytinyağı), kiralık odalar, iş fırsatları ve yerel duyurular."
+                : "Bulk imports (Turkish coffee, olive oil), room rentals, job leads, and local announcements."}
             </p>
           </div>
 
@@ -80,7 +99,7 @@ export function NoticeboardSection({
             className="gap-1.5 self-start md:self-auto"
           >
             <Plus className="h-4 w-4" />
-            <span>Post a Notice</span>
+            <span>{isTr ? "Duyuru / İlan Ver" : "Post a Notice"}</span>
           </Button>
         </div>
 
@@ -94,7 +113,7 @@ export function NoticeboardSection({
                 : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-400"
             }`}
           >
-            All Notices ({initialNotices.length})
+            {isTr ? `Tüm Duyurular (${initialNotices.length})` : `All Notices (${initialNotices.length})`}
           </button>
           <button
             onClick={() => setFilterType("bulk_order")}
@@ -104,7 +123,7 @@ export function NoticeboardSection({
                 : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-400"
             }`}
           >
-            Bulk Orders & Imports
+            {isTr ? "Toplu Sipariş & İthalat" : "Bulk Orders & Imports"}
           </button>
           <button
             onClick={() => setFilterType("job")}
@@ -114,7 +133,7 @@ export function NoticeboardSection({
                 : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-400"
             }`}
           >
-            Jobs & Housing
+            {isTr ? "İş & Kiralık Oda" : "Jobs & Housing"}
           </button>
           <button
             onClick={() => setFilterType("general")}
@@ -124,7 +143,7 @@ export function NoticeboardSection({
                 : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-400"
             }`}
           >
-            General & Events
+            {isTr ? "Genel Duyurular" : "General Community"}
           </button>
         </div>
 

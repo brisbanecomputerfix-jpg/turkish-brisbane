@@ -29,6 +29,7 @@ import {
   Map as MapIcon,
   Briefcase,
   Calendar as CalendarIcon,
+  Heart,
 } from "lucide-react";
 
 export function SaasSidebar() {
@@ -39,8 +40,11 @@ export function SaasSidebar() {
     setSubmitBusinessOpen,
     setSubmitNoticeOpen,
     setA11yOpen,
+    language,
+    toggleLanguage,
   } = useApp();
 
+  const isTr = language === "tr";
   const pathname = usePathname();
 
   // Close on route change
@@ -62,26 +66,27 @@ export function SaasSidebar() {
   if (!isSidebarOpen) return null;
 
   const navLinks = [
-    { href: "/", label: "Home", icon: Home, exact: true },
-    { href: "/directory", label: "Business Directory", icon: Building2, badge: "Verified" },
-    { href: "/directory/map", label: "Interactive Map", icon: MapIcon, badge: "Map" },
-    { href: "/jobs", label: "Careers & Job Pool", icon: Briefcase, badge: "Hiring" },
-    { href: "/hire-a-student", label: "Hire a Turkish Student", icon: GraduationCap, badge: "Support" },
-    { href: "/events", label: "Events & Calendar", icon: CalendarIcon, badge: "Upcoming" },
-    { href: "/noticeboard", label: "Noticeboard", icon: BellRing, badge: "Active" },
-    { href: "/guide", label: "Living in QLD Guide", icon: BookOpen },
-    { href: "/blog", label: "Insights & Playbooks", icon: BookOpen, badge: "New" },
-    { href: "/about", label: "About & E-E-A-T Standards", icon: Info },
-    { href: "/contact", label: "Contact & Support", icon: Mail },
+    { href: "/", label: isTr ? "Ana Sayfa" : "Home", icon: Home, exact: true },
+    { href: "/directory", label: isTr ? "İşletme Rehberi" : "Business Directory", icon: Building2, badge: isTr ? "Onaylı" : "Verified" },
+    { href: "/directory/map", label: isTr ? "İnteraktif Harita" : "Interactive Map", icon: MapIcon, badge: isTr ? "Harita" : "Map" },
+    { href: "/jobs", label: isTr ? "Kariyer & İş Havuzu" : "Careers & Job Pool", icon: Briefcase, badge: isTr ? "İlanlar" : "Hiring" },
+    { href: "/hire-a-student", label: isTr ? "Bir Öğrenciye Destek Ol" : "Hire a Turkish Student", icon: GraduationCap, badge: isTr ? "Dayanışma" : "Support" },
+    { href: "/seniors", label: isTr ? "Büyüklerimiz & Park Piknikleri" : "Elders & Park Picnics", icon: Heart, badge: isTr ? "Piknik" : "Semaver" },
+    { href: "/events", label: isTr ? "Etkinlikler & Takvim" : "Events & Calendar", icon: CalendarIcon, badge: isTr ? "Yaklaşan" : "Upcoming" },
+    { href: "/noticeboard", label: isTr ? "Duyuru Panosu" : "Noticeboard", icon: BellRing, badge: isTr ? "Aktif" : "Active" },
+    { href: "/guide", label: isTr ? "QLD Yaşam Rehberi" : "Living in QLD Guide", icon: BookOpen },
+    { href: "/blog", label: isTr ? "Makaleler & Rehberler" : "Insights & Playbooks", icon: BookOpen, badge: isTr ? "Yeni" : "New" },
+    { href: "/about", label: isTr ? "Hakkımızda & Standartlar" : "About & E-E-A-T Standards", icon: Info },
+    { href: "/contact", label: isTr ? "İletişim & Destek" : "Contact & Support", icon: Mail },
   ];
 
   const categories = [
-    { name: "Medical & Health", icon: Stethoscope, href: "/directory?category=Medical" },
-    { name: "Legal & Migration", icon: Scale, href: "/directory?category=Legal" },
-    { name: "Food & Groceries", icon: UtensilsCrossed, href: "/directory?category=Food%20%26%20Groceries" },
-    { name: "Tech Support & IT", icon: Laptop, href: "/directory?category=Tech%20Support%20%26%20IT" },
-    { name: "Trades & Services", icon: Wrench, href: "/directory?category=Trades" },
-    { name: "Education & Lessons", icon: GraduationCap, href: "/directory?category=Education" },
+    { name: isTr ? "Sağlık & Tıp" : "Medical & Health", icon: Stethoscope, href: "/directory?category=Medical" },
+    { name: isTr ? "Hukuk & Göçmenlik" : "Legal & Migration", icon: Scale, href: "/directory?category=Legal" },
+    { name: isTr ? "Market & Yeme-İçme" : "Food & Groceries", icon: UtensilsCrossed, href: "/directory?category=Food%20%26%20Groceries" },
+    { name: isTr ? "Bilişim & IT" : "Tech Support & IT", icon: Laptop, href: "/directory?category=Tech%20Support%20%26%20IT" },
+    { name: isTr ? "Ustalar & Tamirat" : "Trades & Services", icon: Wrench, href: "/directory?category=Trades" },
+    { name: isTr ? "Eğitim & Dersler" : "Education & Lessons", icon: GraduationCap, href: "/directory?category=Education" },
   ];
 
   return (
@@ -133,10 +138,10 @@ export function SaasSidebar() {
           <div className="rounded-xl border border-zinc-200/80 bg-zinc-50/70 p-3.5 dark:border-zinc-800 dark:bg-zinc-900/50">
             <div className="flex items-center gap-2 text-xs font-semibold text-zinc-900 dark:text-zinc-100">
               <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Verified WhatsApp Network</span>
+              <span>{isTr ? "Onaylı WhatsApp Topluluğu" : "Verified WhatsApp Network"}</span>
             </div>
             <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">
-              420+ Turkish-Australians across Brisbane, Gold Coast & QLD.
+              {isTr ? "Brisbane, Gold Coast ve QLD genelinde 420+ Türk üye." : "420+ Turkish-Australians across Brisbane, Gold Coast & QLD."}
             </p>
             <Button
               variant="turkish"
@@ -148,14 +153,14 @@ export function SaasSidebar() {
               }}
             >
               <MessageCircle className="h-3.5 w-3.5" />
-              <span>Join WhatsApp Hub</span>
+              <span>{isTr ? "WhatsApp Grubuna Katıl" : "Join WhatsApp Hub"}</span>
             </Button>
           </div>
 
           {/* Main Links */}
           <div className="space-y-1">
             <div className="px-2 pb-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
-              Navigation
+              {isTr ? "Menü & Sayfalar" : "Navigation"}
             </div>
             {navLinks.map((item) => {
               const isActive = item.exact
@@ -189,12 +194,12 @@ export function SaasSidebar() {
           {/* Directory Categories */}
           <div className="space-y-1">
             <div className="flex items-center justify-between px-2 pb-1 text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
-              <span>Directory Sectors</span>
+              <span>{isTr ? "Rehber Kategorileri" : "Directory Sectors"}</span>
               <Link
                 href="/directory"
                 className="text-[10px] text-[#E30A17] hover:underline"
               >
-                View all
+                {isTr ? "Tümünü Gör" : "View all"}
               </Link>
             </div>
             {categories.map((cat) => {
@@ -227,7 +232,7 @@ export function SaasSidebar() {
               }}
             >
               <Plus className="h-3.5 w-3.5 text-[#E30A17]" />
-              <span>List Turkish Business (Free)</span>
+              <span>{isTr ? "İşletme Ekle (Ücretsiz)" : "List Turkish Business (Free)"}</span>
             </Button>
             <Button
               variant="outline"
@@ -239,7 +244,7 @@ export function SaasSidebar() {
               }}
             >
               <Plus className="h-3.5 w-3.5 text-zinc-500" />
-              <span>Post Community Notice</span>
+              <span>{isTr ? "Duyuru / İlan Ver" : "Post Community Notice"}</span>
             </Button>
           </div>
         </div>

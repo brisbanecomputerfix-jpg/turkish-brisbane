@@ -28,6 +28,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { IsometricJobPool } from "@/components/ui/isometric-icons";
 import { JobPosting, CandidateProfile } from "@/data/job-listings";
+import { useApp } from "@/context/app-context";
 
 interface JobsClientProps {
   initialJobs: JobPosting[];
@@ -46,6 +47,9 @@ const CATEGORIES = [
 const EMPLOYMENT_TYPES = ["All", "Full-time", "Part-time", "Casual", "Apprenticeship"];
 
 export function JobsClient({ initialJobs, initialCandidates }: JobsClientProps) {
+  const { language } = useApp();
+  const isTr = language === "tr";
+
   const searchParams = useSearchParams();
   const initialTab = searchParams.get("tab") === "candidates" ? "candidates" : "jobs";
   const [activeTab, setActiveTab] = React.useState<"jobs" | "candidates">(initialTab);
@@ -244,13 +248,17 @@ export function JobsClient({ initialJobs, initialCandidates }: JobsClientProps) 
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600 dark:bg-blue-950/30 dark:border-blue-500/30 mb-3">
                 <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse" />
-                Queensland Turkish Workforce & Job Pool
+                {isTr ? "Queensland Türk İş Gücü & Kariyer Havuzu" : "Queensland Turkish Workforce & Job Pool"}
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
-                Connecting Bilingual Talent With Trusted Queensland Employers
+                {isTr
+                  ? "İki Dilli Yetenekleri Güvenilir Queensland İşverenleriyle Buluşturuyoruz"
+                  : "Connecting Bilingual Talent With Trusted Queensland Employers"}
               </h1>
               <p className="mt-3 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                A verified career network matching Turkish-speaking tradespeople, chefs, healthcare professionals, engineers, and international students with legitimate, Fair Work-compliant employers.
+                {isTr
+                  ? "Türkçe konuşan ustaları, şefleri, sağlıkçıları, mühendisleri ve öğrencileri Fair Work standartlarına uygun yasal işverenlerle buluşturan kariyer ağı."
+                  : "A verified career network matching Turkish-speaking tradespeople, chefs, healthcare professionals, engineers, and international students with legitimate, Fair Work-compliant employers."}
               </p>
 
               {/* Action Buttons */}
@@ -262,7 +270,7 @@ export function JobsClient({ initialJobs, initialCandidates }: JobsClientProps) 
                   className="gap-2 shadow-xs"
                 >
                   <Plus className="h-4 w-4" />
-                  <span>Post a Vacancy (Employers)</span>
+                  <span>{isTr ? "İş İlanı Ver (İşverenler)" : "Post a Vacancy (Employers)"}</span>
                 </Button>
                 <Button
                   onClick={() => setJoinTalentOpen(true)}
@@ -271,7 +279,7 @@ export function JobsClient({ initialJobs, initialCandidates }: JobsClientProps) 
                   className="gap-2 bg-white dark:bg-zinc-900 border-zinc-300 dark:border-zinc-700"
                 >
                   <Users className="h-4 w-4 text-blue-600" />
-                  <span>Join Talent Pool (Jobseekers)</span>
+                  <span>{isTr ? "Yetenek Havuzuna Katıl (İş Arayanlar)" : "Join Talent Pool (Jobseekers)"}</span>
                 </Button>
               </div>
             </div>
@@ -280,7 +288,7 @@ export function JobsClient({ initialJobs, initialCandidates }: JobsClientProps) 
             <div className="hidden lg:flex flex-col items-center justify-center p-6 rounded-2xl bg-blue-50/50 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900/30 shrink-0">
               <IsometricJobPool size={140} />
               <span className="mt-2 text-[11px] font-semibold text-blue-600 dark:text-blue-400">
-                Verified Career Network
+                {isTr ? "Onaylı Kariyer Ağı" : "Verified Career Network"}
               </span>
             </div>
           </div>
@@ -299,7 +307,7 @@ export function JobsClient({ initialJobs, initialCandidates }: JobsClientProps) 
               }`}
             >
               <Briefcase className="h-4 w-4 text-[#E30A17]" />
-              <span>Verified Job Openings</span>
+              <span>{isTr ? "Açık İş İlanları" : "Verified Job Openings"}</span>
               <span className="ml-1 rounded-full bg-red-100 px-2 py-0.5 text-[10px] font-semibold text-[#E30A17] dark:bg-red-950/60">
                 {jobs.length}
               </span>
@@ -315,7 +323,7 @@ export function JobsClient({ initialJobs, initialCandidates }: JobsClientProps) 
               }`}
             >
               <Users className="h-4 w-4 text-blue-600" />
-              <span>Talent Pool & Candidates</span>
+              <span>{isTr ? "Yetenek Havuzu & Adaylar" : "Talent Pool & Candidates"}</span>
               <span className="ml-1 rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-semibold text-blue-600 dark:bg-blue-950/60">
                 {candidates.length}
               </span>

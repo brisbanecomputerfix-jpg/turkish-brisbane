@@ -65,6 +65,12 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/seniors" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors flex items-center gap-1.5">
+                  <span>Elders & Park Picnics</span>
+                  <span className="text-[9px] bg-red-50 dark:bg-red-950 text-[#E30A17] px-1.5 py-0.2 rounded font-bold">Piknik</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/noticeboard" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
                   Noticeboard & Housing
                 </Link>

@@ -13,7 +13,20 @@ import {
   IsometricInvestment,
   IsometricLegalTrade,
 } from "@/components/ui/isometric-icons";
-import { Shield, Building, Coffee, MessageCircle, Plus, ArrowRight, BookOpen } from "lucide-react";
+import {
+  Shield,
+  Building,
+  Coffee,
+  MessageCircle,
+  Plus,
+  ArrowRight,
+  BookOpen,
+  GraduationCap,
+  Heart,
+  Users,
+  ChevronRight,
+  Sparkles,
+} from "lucide-react";
 
 interface HomeClientProps {
   initialBusinesses: BusinessItem[];
@@ -21,7 +34,8 @@ interface HomeClientProps {
 }
 
 export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProps) {
-  const { setWhatsAppOpen, setSubmitBusinessOpen, setSubmitNoticeOpen } = useApp();
+  const { setWhatsAppOpen, setSubmitBusinessOpen, setSubmitNoticeOpen, language } = useApp();
+  const isTr = language === "tr";
 
   return (
     <div>
@@ -30,6 +44,73 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
         onOpenWhatsApp={() => setWhatsAppOpen(true)}
         onOpenSubmitBusiness={() => setSubmitBusinessOpen(true)}
       />
+
+      {/* Community Spotlight Banners: Students Solidarity & Elders Picnics */}
+      <section className="py-8 bg-zinc-50/80 dark:bg-zinc-900/50 border-b border-zinc-200/80 dark:border-zinc-800">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Card 1: Hire a Student */}
+            <Link
+              href="/hire-a-student"
+              className="group relative flex items-start gap-4 rounded-2xl border border-emerald-200/80 bg-white p-5 shadow-xs hover:shadow-md hover:border-emerald-300 transition-all dark:border-emerald-950 dark:bg-zinc-900"
+            >
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 group-hover:scale-105 transition-transform">
+                <GraduationCap className="h-6 w-6" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 rounded-full">
+                    {isTr ? "Öğrenci Dayanışması" : "Student Solidarity"}
+                  </span>
+                  <span className="text-xs text-zinc-400">QLD Universities</span>
+                </div>
+                <h3 className="mt-1 text-base font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
+                  {isTr ? "Bir Türk Öğrenciye Destek Olun" : "Hire A Turkish Student Abroad"}
+                </h3>
+                <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">
+                  {isTr
+                    ? "Çocuk bakımı, temizlik, boya-tamirat ve özel derslerde gece kuryeliği yerine saygın iş ve adil kazanç."
+                    : "Fair-pay babysitting, cleaning, handyman & tutoring jobs for Queensland Turkish students facing high living costs."}
+                </p>
+                <div className="mt-3 flex items-center gap-1 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+                  <span>{isTr ? "Profilleri & İlanları İncele" : "Explore Profiles & Post Tasks"}</span>
+                  <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </div>
+              </div>
+            </Link>
+
+            {/* Card 2: Elders & Park Picnics */}
+            <Link
+              href="/seniors"
+              className="group relative flex items-start gap-4 rounded-2xl border border-red-200/80 bg-white p-5 shadow-xs hover:shadow-md hover:border-red-300 transition-all dark:border-red-950 dark:bg-zinc-900"
+            >
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-50 text-[#E30A17] dark:bg-red-950/60 dark:text-red-300 group-hover:scale-105 transition-transform">
+                <Heart className="h-6 w-6" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#E30A17] dark:text-red-400 bg-red-50 dark:bg-red-950/50 px-2 py-0.5 rounded-full">
+                    {isTr ? "Büyüklerimiz Kulübü" : "Elders Circle"}
+                  </span>
+                  <span className="text-xs text-zinc-400">Brisbane & Gold Coast</span>
+                </div>
+                <h3 className="mt-1 text-base font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-[#E30A17] dark:group-hover:text-red-400 transition-colors">
+                  {isTr ? "Park Piknikleri, Semaver Çayı & Tavla" : "Public Park Picnics & Samovar Tea"}
+                </h3>
+                <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">
+                  {isTr
+                    ? "Roma Street, New Farm ve South Bank gölgeliklerinde açık hava çayı, ev yapımı börekler ve genç şoför desteği."
+                    : "Shaded park gatherings, fresh samovar çay, backgammon tournaments, and free youth volunteer carpool."}
+                </p>
+                <div className="mt-3 flex items-center gap-1 text-xs font-semibold text-[#E30A17] dark:text-red-400">
+                  <span>{isTr ? "Piknik Takvimi & Gönüllü Şoför Ol" : "View Picnics & Volunteer Driver"}</span>
+                  <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Directory Section */}
       <DirectorySection
@@ -50,13 +131,17 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-red-500/20 bg-red-50 px-3 py-1 text-xs font-semibold text-[#E30A17] dark:bg-red-950/30 dark:border-red-500/30 mb-3">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#E30A17] animate-pulse" />
-                Strategic Mission & Platform Pillars
+                {isTr ? "Stratejik Misyon & Platform Temelleri" : "Strategic Mission & Platform Pillars"}
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
-                Bridging the Missing Gap for Queensland Turks
+                {isTr
+                  ? "Queensland Türk Topluluğu İçin Eksik Halka Tamamlanıyor"
+                  : "Bridging the Missing Gap for Queensland Turks"}
               </h2>
               <p className="mt-3 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                We replace fragmented social groups with an authoritative ecosystem: verified local directory, career job pool, bilateral business expansion, and comprehensive legal & trade compliance.
+                {isTr
+                  ? "Dağınık sosyal medya gruplarının yerini kurumsal, güvenilir bir ekosistem alıyor: ABR onaylı işletme rehberi, kariyer iş havuzu, iki yönlü ticaret açılımı ve kapsamlı yasal-ticari mevzuat rehberliği."
+                  : "We replace fragmented social groups with an authoritative ecosystem: verified local directory, career job pool, bilateral business expansion, and comprehensive legal & trade compliance."}
               </p>
             </div>
             <div>
@@ -65,7 +150,7 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
                 className="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-zinc-800 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-700 hover:border-[#E30A17] hover:text-[#E30A17] dark:hover:border-[#E30A17] dark:hover:text-[#E30A17] transition-all shadow-sm group"
               >
                 <BookOpen className="h-4 w-4 text-[#E30A17]" />
-                <span>Read Full Insights & Playbooks</span>
+                <span>{isTr ? "Makale & Rehberleri İncele" : "Read Full Insights & Playbooks"}</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
@@ -84,18 +169,20 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
                 </div>
                 <div className="mt-5">
                   <span className="text-xs font-semibold tracking-wide uppercase text-[#E30A17]">
-                    Community Unity
+                    {isTr ? "Topluluk Birliği" : "Community Unity"}
                   </span>
                   <h3 className="mt-1 text-base font-bold text-zinc-900 group-hover:text-[#E30A17] transition-colors dark:text-zinc-100">
-                    Bridging Community Fragmentation
+                    {isTr ? "Dağınıklığı Ortadan Kaldırıyoruz" : "Bridging Community Fragmentation"}
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                    Uniting scattered Turkish diaspora into an institutional, human-moderated network across Brisbane, Gold Coast & QLD.
+                    {isTr
+                      ? "Brisbane, Gold Coast ve QLD'deki Türk diasporasını bağımsız, güvenilir ve sürdürülebilir kurumsal bir çatı altında birleştiriyoruz."
+                      : "Uniting scattered Turkish diaspora into an institutional, human-moderated network across Brisbane, Gold Coast & QLD."}
                   </p>
                 </div>
               </div>
               <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-[#E30A17]">
-                <span>Read analysis</span>
+                <span>{isTr ? "Analizi oku" : "Read analysis"}</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </div>
             </Link>
@@ -111,18 +198,20 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
                 </div>
                 <div className="mt-5">
                   <span className="text-xs font-semibold tracking-wide uppercase text-blue-600 dark:text-blue-400">
-                    Talent & Careers
+                    {isTr ? "Yetenek & Kariyer" : "Talent & Careers"}
                   </span>
                   <h3 className="mt-1 text-base font-bold text-zinc-900 group-hover:text-blue-600 transition-colors dark:text-zinc-100">
-                    Unified Turkish Job Pool
+                    {isTr ? "Ortak Türk İş Havuzu" : "Unified Turkish Job Pool"}
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                    Connecting bilingual engineers, tradespeople, tech specialists, and students with verified, fair-pay employers.
+                    {isTr
+                      ? "İki dilli mühendisleri, ustaları, bilişim uzmanlarını ve üniversite öğrencilerini saygın, adil ücretli işverenlerle buluşturuyoruz."
+                      : "Connecting bilingual engineers, tradespeople, tech specialists, and students with verified, fair-pay employers."}
                   </p>
                 </div>
               </div>
               <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
-                <span>Explore Jobs & Talent Pool</span>
+                <span>{isTr ? "İş İlanları & Havuzu Keşfet" : "Explore Jobs & Talent Pool"}</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </div>
             </Link>
@@ -138,18 +227,20 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
                 </div>
                 <div className="mt-5">
                   <span className="text-xs font-semibold tracking-wide uppercase text-emerald-600 dark:text-emerald-400">
-                    Bilateral Trade
+                    {isTr ? "İki Yönlü Ticaret" : "Bilateral Trade"}
                   </span>
                   <h3 className="mt-1 text-base font-bold text-zinc-900 group-hover:text-emerald-600 transition-colors dark:text-zinc-100">
-                    Bilateral Trade & Investments
+                    {isTr ? "Ticaret & Yatırım Fırsatları" : "Bilateral Trade & Investments"}
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                    Unlocking cross-border capital, construction materials, food distribution, and diaspora investment syndicates.
+                    {isTr
+                      ? "Türkiye ve Queensland arasında inşaat malzemeleri, gıda tedariki, toptan ithalat ve diaspora yatırım ortaklıklarını canlandırıyoruz."
+                      : "Unlocking cross-border capital, construction materials, food distribution, and diaspora investment syndicates."}
                   </p>
                 </div>
               </div>
               <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                <span>Explore opportunities</span>
+                <span>{isTr ? "Fırsatları incele" : "Explore opportunities"}</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </div>
             </Link>
@@ -165,18 +256,20 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
                 </div>
                 <div className="mt-5">
                   <span className="text-xs font-semibold tracking-wide uppercase text-violet-600 dark:text-violet-400">
-                    Legal & Compliance
+                    {isTr ? "Mevzuat & Hukuk" : "Legal & Compliance"}
                   </span>
                   <h3 className="mt-1 text-base font-bold text-zinc-900 group-hover:text-violet-600 transition-colors dark:text-zinc-100">
-                    Trade & Legal Playbook
+                    {isTr ? "Queensland Ticaret & Hukuk Rehberi" : "Trade & Legal Playbook"}
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                    Practical legal roadmaps: ABN vs Pty Ltd, QBCC builder licensing, Fair Work standards, and DAFF import biosecurity.
+                    {isTr
+                      ? "ABN ve Pty Ltd şirket kuruluşu, QBCC müteahhit lisansları, Fair Work çalışan hakları ve DAFF biyogüvenlik ithalat mevzuatı."
+                      : "Practical legal roadmaps: ABN vs Pty Ltd, QBCC builder licensing, Fair Work standards, and DAFF import biosecurity."}
                   </p>
                 </div>
               </div>
               <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-violet-600 dark:text-violet-400">
-                <span>Read legal guide</span>
+                <span>{isTr ? "Hukuk rehberini oku" : "Read legal guide"}</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </div>
             </Link>
@@ -189,10 +282,12 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
-              Built for the Queensland Turkish Community
+              {isTr ? "Queensland Türk Topluluğu İçin İnşa Edildi" : "Built for the Queensland Turkish Community"}
             </h2>
             <p className="mt-3 text-sm sm:text-base text-zinc-500 dark:text-zinc-400 leading-relaxed">
-              We started QLD Turks to bridge the gap between newcomers, long-term residents, students, and businesses. A reliable directory with verified contact points.
+              {isTr
+                ? "QLD Turks'ü yeni gelenler, uzun yıllardır yaşayanlar, öğrenciler ve işletmeler arasındaki bağı güçlendirmek için kurduk. Güvenilir ve teyitli temas noktaları."
+                : "We started QLD Turks to bridge the gap between newcomers, long-term residents, students, and businesses. A reliable directory with verified contact points."}
             </p>
           </div>
 
@@ -202,10 +297,12 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
                 <Shield className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
               </div>
               <h3 className="mt-4 text-base font-semibold text-zinc-900 dark:text-zinc-100">
-                Protected WhatsApp Hub
+                {isTr ? "Güvenli WhatsApp Topluluğu" : "Protected WhatsApp Hub"}
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                Our official WhatsApp group is guarded by human confirmation to keep conversations spam-free, respectful, and genuine.
+                {isTr
+                  ? "Resmi WhatsApp grubumuz spam, reklam ve manipülasyondan uzak, saygılı ve yardımsever bir ortam sağlamak için yönetici onaylıdır."
+                  : "Our official WhatsApp group is guarded by human confirmation to keep conversations spam-free, respectful, and genuine."}
               </p>
             </div>
 
@@ -214,10 +311,12 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
                 <Building className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
               </div>
               <h3 className="mt-4 text-base font-semibold text-zinc-900 dark:text-zinc-100">
-                100% Free Listings
+                {isTr ? "%100 Ücretsiz İlan & Kayıt" : "100% Free Listings"}
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                Turkish-speaking doctors, lawyers, tradespeople, restaurants, and IT specialists can list their services without listing fees.
+                {isTr
+                  ? "Türkçe konuşan doktorlar, avukatlar, ustalar, restoranlar ve bilişim uzmanları hizmetlerini hiçbir listeleme ücreti ödemeden tanıtabilir."
+                  : "Turkish-speaking doctors, lawyers, tradespeople, restaurants, and IT specialists can list their services without listing fees."}
               </p>
             </div>
 
@@ -226,10 +325,12 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
                 <Coffee className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
               </div>
               <h3 className="mt-4 text-base font-semibold text-zinc-900 dark:text-zinc-100">
-                Bulk Orders & Mutual Aid
+                {isTr ? "Ortak Sipariş & Dayanışma" : "Bulk Orders & Mutual Aid"}
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                Community-led group orders reduce freight costs on authentic Turkish coffee, Aegean olive oil, and kitchen essentials.
+                {isTr
+                  ? "Topluluk tabanlı ortak siparişler sayesinde taze Türk kahvesi, Ege sızma zeytinyağı ve temel lezzetlerde navlun maliyetleri düşüyor."
+                  : "Community-led group orders reduce freight costs on authentic Turkish coffee, Aegean olive oil, and kitchen essentials."}
               </p>
             </div>
           </div>
@@ -239,10 +340,12 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold">
-                  Join the Queensland Turkish Network
+                  {isTr ? "Queensland Türk Ağına Katılın" : "Join the Queensland Turkish Network"}
                 </h3>
                 <p className="mt-2 text-sm text-zinc-400 max-w-lg">
-                  Get access to the private WhatsApp group or list your business on the directory.
+                  {isTr
+                    ? "Özel WhatsApp grubumuza katılın veya işletmenizi rehbere ücretsiz ekleyin."
+                    : "Get access to the private WhatsApp group or list your business on the directory."}
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
@@ -252,7 +355,7 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
                   className="gap-2"
                 >
                   <MessageCircle className="h-4 w-4" />
-                  Join WhatsApp
+                  {isTr ? "WhatsApp'a Katıl" : "Join WhatsApp"}
                 </Button>
                 <Button
                   onClick={() => setSubmitBusinessOpen(true)}
@@ -260,7 +363,7 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
                   className="border-zinc-700 bg-zinc-800 text-white hover:bg-zinc-700 hover:text-white"
                 >
                   <Plus className="h-4 w-4" />
-                  List Business
+                  {isTr ? "İşletme Ekle" : "List Business"}
                 </Button>
               </div>
             </div>

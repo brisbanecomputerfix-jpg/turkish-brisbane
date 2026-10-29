@@ -32,6 +32,19 @@ import {
   STUDENT_CATEGORIES,
 } from "@/data/students-data";
 import { Button } from "@/components/ui/button";
+import { useApp } from "@/context/app-context";
+
+const STUDENT_CAT_TR_MAP: Record<string, string> = {
+  "All Services": "Tüm Hizmetler",
+  "Babysitting & Childcare": "Çocuk Bakımı",
+  "House Cleaning & Tidying": "Ev Temizliği",
+  "Handyman & Home Repairs": "Tamirat & Montaj",
+  "Moving & Heavy Lifting": "Taşıma & Nakliye",
+  "Tutoring & Turkish Lessons": "Özel Ders & Türkçe",
+  "Gardening & Yard Maintenance": "Bahçe Bakımı",
+  "Tech Support & Coding": "Bilişim & Kodlama",
+  "Cooking & Meal Prep": "Yemek Yapımı & Mutfak",
+};
 
 interface StudentsClientProps {
   initialStudents: StudentProfile[];
@@ -42,6 +55,9 @@ export function StudentsClient({
   initialStudents,
   initialTasks,
 }: StudentsClientProps) {
+  const { language } = useApp();
+  const isTr = language === "tr";
+
   const [students, setStudents] = React.useState<StudentProfile[]>(initialStudents);
   const [tasks, setTasks] = React.useState<StudentTaskRequest[]>(initialTasks);
   const [activeTab, setActiveTab] = React.useState<"students" | "tasks">("students");
@@ -236,16 +252,22 @@ export function StudentsClient({
             <div className="max-w-3xl space-y-3.5">
               <div className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50/90 px-3 py-1 text-xs font-semibold text-[#E30A17] dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300">
                 <GraduationCap className="h-3.5 w-3.5 text-[#E30A17]" />
-                <span>Queensland Turkish Student Solidarity & Opportunity Initiative</span>
+                <span>
+                  {isTr
+                    ? "Queensland Türk Öğrenci Dayanışma ve İstihdam Hareketi"
+                    : "Queensland Turkish Student Solidarity & Opportunity Initiative"}
+                </span>
               </div>
               <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-4xl lg:text-5xl">
-                Hire A Turkish Student:{" "}
+                {isTr ? "Bir Türk Öğrenciye Destek Olun: " : "Hire A Turkish Student: "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E30A17] via-red-600 to-cyan-600 dark:to-cyan-400">
-                  Dignity, Skill & Community Support
+                  {isTr ? "Saygın İş, Beceri ve Topluluk Gücü" : "Dignity, Skill & Community Support"}
                 </span>
               </h1>
               <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                Many talented Turkish international students in Queensland face extreme living costs and are forced into perilous midnight food delivery and gig courier shifts. By hiring them directly for babysitting, home cleaning, handyman repairs, IT troubleshooting, and tutoring, our community provides dignified, fair-paying work while benefiting from trusted bilingual talent.
+                {isTr
+                  ? "Queensland'deki yetenekli Türk üniversite öğrencileri yüksek yaşam maliyetleri yüzünden geceleri tehlikeli kuryelik ve paket servis işlerinde yıpranıyor. Onları çocuk bakımı, ev temizliği, boya-tamirat, bilgisayar desteği ve Türkçe dersleri için tercih ederek hem hak ettikleri saygın kazancı sağlayın, hem de güvenilir Türk gençlerinden destek alın."
+                  : "Many talented Turkish international students in Queensland face extreme living costs and are forced into perilous midnight food delivery and gig courier shifts. By hiring them directly for babysitting, home cleaning, handyman repairs, IT troubleshooting, and tutoring, our community provides dignified, fair-paying work while benefiting from trusted bilingual talent."}
               </p>
             </div>
 
@@ -257,7 +279,7 @@ export function StudentsClient({
                 className="gap-2 text-xs font-semibold shadow-sm"
               >
                 <Plus className="h-4 w-4" />
-                <span>Post a Job / Task for Students</span>
+                <span>{isTr ? "Öğrencilere İş / Görev İlanı Ver" : "Post a Job / Task for Students"}</span>
               </Button>
 
               <Button
@@ -266,7 +288,7 @@ export function StudentsClient({
                 className="gap-2 text-xs font-medium border-zinc-300 bg-white dark:bg-zinc-900 dark:border-zinc-700 hover:border-[#E30A17]"
               >
                 <GraduationCap className="h-4 w-4 text-[#E30A17]" />
-                <span>I Am a Turkish Student (Register)</span>
+                <span>{isTr ? "Ben Türk Öğrenciyim (Profil Ekle)" : "I Am a Turkish Student (Register)"}</span>
               </Button>
             </div>
           </div>
@@ -279,10 +301,12 @@ export function StudentsClient({
               </div>
               <div>
                 <div className="text-xs font-bold text-zinc-900 dark:text-zinc-100">
-                  $30 – $45/hr Fair Wage
+                  {isTr ? "$30 – $45/saat Adil Ücret" : "$30 – $45/hr Fair Wage"}
                 </div>
                 <div className="text-[11px] text-zinc-500">
-                  No below-award cash-in-hand exploitation. Fair pay for honest, quality work.
+                  {isTr
+                    ? "Asgari ücretin altında sömürüye son. Dürüst ve kaliteli emeğe layık adil ödeme."
+                    : "No below-award cash-in-hand exploitation. Fair pay for honest, quality work."}
                 </div>
               </div>
             </div>
@@ -296,7 +320,9 @@ export function StudentsClient({
                   Blue Card & White Card
                 </div>
                 <div className="text-[11px] text-zinc-500">
-                  Verified Queensland Working with Children Checks for trusted babysitting & tutoring.
+                  {isTr
+                    ? "Çocuk bakımı ve dersler için Queensland resmi çocuk koruma (Blue Card) doğrulaması."
+                    : "Verified Queensland Working with Children Checks for trusted babysitting & tutoring."}
                 </div>
               </div>
             </div>
@@ -307,10 +333,12 @@ export function StudentsClient({
               </div>
               <div>
                 <div className="text-xs font-bold text-zinc-900 dark:text-zinc-100">
-                  Turkish Language Immersion
+                  {isTr ? "Türkçe Dil & Kültür Bağı" : "Turkish Language Immersion"}
                 </div>
                 <div className="text-[11px] text-zinc-500">
-                  Babysitters and tutors help children speak, read, and maintain native Turkish.
+                  {isTr
+                    ? "Bakıcı ve eğitmen ablalar/abiler çocuklarınızın ana dilini korumasına yardımcı olur."
+                    : "Babysitters and tutors help children speak, read, and maintain native Turkish."}
                 </div>
               </div>
             </div>
@@ -321,10 +349,12 @@ export function StudentsClient({
               </div>
               <div>
                 <div className="text-xs font-bold text-zinc-900 dark:text-zinc-100">
-                  48-Hr Visa Compliant
+                  {isTr ? "48-Saat Vize Uyumlu" : "48-Hr Visa Compliant"}
                 </div>
                 <div className="text-[11px] text-zinc-500">
-                  All hours strictly respect Department of Home Affairs student visa limitations.
+                  {isTr
+                    ? "Tüm çalışma saatleri Avustralya İçişleri Bakanlığı öğrenci vizesi kurallarına uygundur."
+                    : "All hours strictly respect Department of Home Affairs student visa limitations."}
                 </div>
               </div>
             </div>
@@ -347,7 +377,7 @@ export function StudentsClient({
               }`}
             >
               <UserCheck className="h-4 w-4" />
-              <span>Available Students ({students.length})</span>
+              <span>{isTr ? `Müsait Öğrenciler (${students.length})` : `Available Students (${students.length})`}</span>
             </button>
 
             <button
@@ -360,7 +390,7 @@ export function StudentsClient({
               }`}
             >
               <FileText className="h-4 w-4" />
-              <span>Open Student Tasks ({tasks.length})</span>
+              <span>{isTr ? `Açık Öğrenci İşleri (${tasks.length})` : `Open Student Tasks (${tasks.length})`}</span>
             </button>
           </div>
 
@@ -371,7 +401,7 @@ export function StudentsClient({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by skill, degree, suburb..."
+              placeholder={isTr ? "Beceri, bölüm, semt ile ara..." : "Search by skill, degree, suburb..."}
               className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-zinc-200 bg-white shadow-xs focus:ring-2 focus:ring-[#E30A17] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100"
             />
           </div>
@@ -382,6 +412,7 @@ export function StudentsClient({
           <Filter className="h-3.5 w-3.5 text-zinc-400 shrink-0 ml-1 mr-1" />
           {STUDENT_CATEGORIES.map((cat) => {
             const isSelected = selectedCategory === cat;
+            const label = isTr ? STUDENT_CAT_TR_MAP[cat] || cat : cat;
             return (
               <button
                 key={cat}
@@ -393,7 +424,7 @@ export function StudentsClient({
                     : "bg-white text-zinc-600 hover:bg-zinc-100 border border-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:border-zinc-800 dark:hover:bg-zinc-800"
                 }`}
               >
-                {cat}
+                {label}
               </button>
             );
           })}
@@ -1103,3 +1134,4 @@ export function StudentsClient({
     </div>
   );
 }
+

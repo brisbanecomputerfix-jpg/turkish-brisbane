@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { translations, Language, getTranslation } from "@/lib/i18n";
 
 export type TextSize = "normal" | "md" | "lg";
 
@@ -38,6 +39,12 @@ interface AppContextType {
   a11ySettings: A11ySettings;
   updateA11y: <K extends keyof A11ySettings>(key: K, value: A11ySettings[K]) => void;
   resetA11y: () => void;
+
+  // Localization (Language)
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  toggleLanguage: () => void;
+  t: (key: keyof typeof translations) => string;
 }
 
 const AppContext = React.createContext<AppContextType | undefined>(undefined);
@@ -50,10 +57,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [isA11yOpen, setA11yOpen] = React.useState(false);
 
   const [a11ySettings, setA11ySettings] = React.useState<A11ySettings>(defaultA11ySettings);
+  const [language, setLanguageState] = React.useState<Language>("en");
 
-  // Load accessibility settings from localStorage on client mount
+  // Load language and accessibility settings from localStorage on client mount
   React.useEffect(() => {
     try {
+      const savedLang = localStorage.getItem("qldturks_lang") as Language;
+      if (savedLang === "tr" || savedLang === "en") {
+        setLanguageState(savedLang);
+        document.documentElement.lang = savedLang;
+      }
       const saved = localStorage.getItem("qldturks_a11y");
       if (saved) {
         const parsed = JSON.parse(saved);
@@ -63,6 +76,40 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       // Ignore localStorage errors
     }
   }, []);
+
+  const setLanguage = React.useCallback((lang: Language) => {
+    setLanguageState(lang);
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = lang;
+    }
+    try {
+      localStorage.setItem("qldturks_lang", lang);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const toggleLanguage = React.useCallback(() => {
+    setLanguageState((prev: Language) => {
+      const next: Language = prev === "en" ? "tr" : "en";
+      if (typeof document !== "undefined") {
+        document.documentElement.lang = next;
+      }
+      try {
+        localStorage.setItem("qldturks_lang", next);
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  }, []);
+
+  const t = React.useCallback(
+    (key: keyof typeof translations) => {
+      return getTranslation(key, language);
+    },
+    [language]
+  );
 
   // Apply classes to documentElement when a11ySettings change
   React.useEffect(() => {
@@ -134,6 +181,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         a11ySettings,
         updateA11y,
         resetA11y,
+        language,
+        setLanguage,
+        toggleLanguage,
+        t,
       }}
     >
       {children}

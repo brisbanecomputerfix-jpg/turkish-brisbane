@@ -15,6 +15,7 @@ import {
   Map as MapIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useApp } from "@/context/app-context";
 
 export interface BusinessItem {
   id: string;
@@ -42,10 +43,23 @@ const CATEGORIES = [
   "Education",
 ];
 
+const CATEGORY_TR_MAP: Record<string, string> = {
+  All: "Tümü",
+  "Food & Groceries": "Market & Restoran",
+  Medical: "Sağlık & Tıp",
+  Legal: "Hukuk & Göçmenlik",
+  "Tech Support & IT": "Bilişim & IT",
+  Trades: "Ustalar & Tamirat",
+  Education: "Eğitim & Dersler",
+};
+
 export function DirectorySection({
   initialBusinesses,
   onOpenSubmitBusiness,
 }: DirectorySectionProps) {
+  const { language } = useApp();
+  const isTr = language === "tr";
+
   const [searchQuery, setSearchQuery] = React.useState("");
   const [selectedCategory, setSelectedCategory] = React.useState("All");
   const [copiedId, setCopiedId] = React.useState<string | null>(null);
@@ -80,10 +94,12 @@ export function DirectorySection({
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-zinc-200 dark:border-zinc-800">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
-              Verified Business Directory
+              {isTr ? "Doğrulanmış İşletme Rehberi" : "Verified Business Directory"}
             </h2>
             <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-              Turkish-speaking professionals, services, and shops across Queensland.
+              {isTr
+                ? "Queensland genelinde Türkçe konuşan profesyoneller, hizmetler ve işletmeler."
+                : "Turkish-speaking professionals, services, and shops across Queensland."}
             </p>
           </div>
 
@@ -93,7 +109,7 @@ export function DirectorySection({
               className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-white px-3 py-2 text-xs font-semibold text-zinc-700 hover:border-[#E30A17] hover:text-[#E30A17] dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 shadow-2xs transition-colors"
             >
               <MapIcon className="h-3.5 w-3.5 text-[#E30A17]" />
-              <span>Interactive Map</span>
+              <span>{isTr ? "İnteraktif Harita" : "Interactive Map"}</span>
             </Link>
             <Button
               onClick={onOpenSubmitBusiness}
@@ -102,7 +118,7 @@ export function DirectorySection({
               className="gap-1.5"
             >
               <Plus className="h-4 w-4" />
-              <span>List Your Business</span>
+              <span>{isTr ? "İşletmenizi Ekleyin" : "List Your Business"}</span>
             </Button>
           </div>
         </div>
@@ -115,7 +131,11 @@ export function DirectorySection({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by name, specialty, or suburb (e.g. Doctor, Halal, South Bank)..."
+              placeholder={
+                isTr
+                  ? "İsim, uzmanlık veya bölgeye göre ara (örn. Doktor, Helal, South Bank)..."
+                  : "Search by name, specialty, or suburb (e.g. Doctor, Halal, South Bank)..."
+              }
               className="w-full h-11 pl-10 pr-4 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-zinc-700"
             />
           </div>
@@ -129,6 +149,8 @@ export function DirectorySection({
                   ? initialBusinesses.length
                   : initialBusinesses.filter((b) => b.category === category).length;
 
+              const label = isTr ? CATEGORY_TR_MAP[category] || category : category;
+
               return (
                 <button
                   key={category}
@@ -139,7 +161,7 @@ export function DirectorySection({
                       : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200/80 hover:text-zinc-900 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700"
                   }`}
                 >
-                  <span>{category}</span>
+                  <span>{label}</span>
                   <span
                     className={`text-[10px] font-semibold ${
                       isSelected ? "text-zinc-300 dark:text-zinc-600" : "text-zinc-400"
@@ -155,7 +177,11 @@ export function DirectorySection({
 
         {/* Results Count */}
         <div className="mt-6 text-xs text-zinc-500 font-medium">
-          Showing {filteredBusinesses.length} {filteredBusinesses.length === 1 ? "listing" : "listings"}
+          {isTr
+            ? `${filteredBusinesses.length} işletme gösteriliyor`
+            : `Showing ${filteredBusinesses.length} ${
+                filteredBusinesses.length === 1 ? "listing" : "listings"
+              }`}
         </div>
 
         {/* Business Grid */}
