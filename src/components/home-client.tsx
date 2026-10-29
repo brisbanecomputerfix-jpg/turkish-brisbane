@@ -44,7 +44,7 @@ export function HomeClient({ initialBusinesses, initialNotices }: HomeClientProp
       />
 
       {/* Strategic Mission & 4 Isometric Pillars */}
-      <section className="py-20 bg-zinc-50/70 dark:bg-zinc-900/40 border-y border-zinc-200/80 dark:border-zinc-800/80">
+      <section id="strategic-pillars" className="py-20 bg-zinc-50/70 dark:bg-zinc-900/40 border-y border-zinc-200/80 dark:border-zinc-800/80 scroll-mt-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-zinc-200 dark:border-zinc-800">
             <div className="max-w-2xl">
