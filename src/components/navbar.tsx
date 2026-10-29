@@ -30,6 +30,7 @@ import {
   LayoutGrid,
   Map as MapIcon,
   Briefcase,
+  Calendar as CalendarIcon,
 } from "lucide-react";
 
 export function Navbar() {
@@ -334,6 +335,24 @@ export function Navbar() {
                   </Link>
 
                   <Link
+                    href="/events"
+                    className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
+                  >
+                    <CalendarIcon className="h-4 w-4 text-[#E30A17] mt-0.5 shrink-0" />
+                    <div>
+                      <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
+                        <span>Events & Calendar</span>
+                        <span className="text-[9px] bg-red-50 text-[#E30A17] dark:bg-red-950/60 px-1.5 py-0.2 rounded-full font-bold">
+                          Gatherings
+                        </span>
+                      </div>
+                      <div className="text-[11px] text-zinc-400">
+                        Monthly breakfasts, gala balls & forums
+                      </div>
+                    </div>
+                  </Link>
+
+                  <Link
                     href="/noticeboard?type=bulk_order"
                     className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
                   >
@@ -566,6 +585,18 @@ export function Navbar() {
                 <span>Careers & Job Pool</span>
                 <span className="text-[10px] bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded font-bold">
                   Hiring
+                </span>
+              </div>
+            </Link>
+            <Link
+              href="/events"
+              className="flex items-center gap-2 p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 col-span-2"
+            >
+              <CalendarIcon className="h-4 w-4 text-[#E30A17]" />
+              <div className="flex items-center justify-between w-full">
+                <span>Events & Gatherings</span>
+                <span className="text-[10px] bg-red-100 dark:bg-red-950 text-[#E30A17] px-1.5 py-0.5 rounded font-bold">
+                  Calendar
                 </span>
               </div>
             </Link>

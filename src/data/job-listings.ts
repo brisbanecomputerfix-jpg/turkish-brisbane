@@ -224,3 +224,4 @@ export const INITIAL_CANDIDATE_PROFILES: CandidateProfile[] = [
     registeredAt: "2026-10-19",
   },
 ];
+
