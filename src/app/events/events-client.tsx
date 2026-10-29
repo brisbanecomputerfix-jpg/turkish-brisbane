@@ -974,3 +974,4 @@ export function EventsClient({ initialEvents }: EventsClientProps) {
     </div>
   );
 }
+

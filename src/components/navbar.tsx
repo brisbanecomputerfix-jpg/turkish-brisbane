@@ -353,6 +353,24 @@ export function Navbar() {
                   </Link>
 
                   <Link
+                    href="/hire-a-student"
+                    className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
+                  >
+                    <GraduationCap className="h-4 w-4 text-emerald-600 mt-0.5 shrink-0" />
+                    <div>
+                      <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
+                        <span>Hire a Turkish Student</span>
+                        <span className="text-[9px] bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 px-1.5 py-0.2 rounded-full font-bold">
+                          Support
+                        </span>
+                      </div>
+                      <div className="text-[11px] text-zinc-400">
+                        Babysitting, cleaning, handyman & tutoring
+                      </div>
+                    </div>
+                  </Link>
+
+                  <Link
                     href="/noticeboard?type=bulk_order"
                     className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
                   >
@@ -597,6 +615,18 @@ export function Navbar() {
                 <span>Events & Gatherings</span>
                 <span className="text-[10px] bg-red-100 dark:bg-red-950 text-[#E30A17] px-1.5 py-0.5 rounded font-bold">
                   Calendar
+                </span>
+              </div>
+            </Link>
+            <Link
+              href="/hire-a-student"
+              className="flex items-center gap-2 p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 col-span-2"
+            >
+              <GraduationCap className="h-4 w-4 text-emerald-600" />
+              <div className="flex items-center justify-between w-full">
+                <span>Hire a Turkish Student</span>
+                <span className="text-[10px] bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 px-1.5 py-0.5 rounded font-bold">
+                  Support
                 </span>
               </div>
             </Link>
